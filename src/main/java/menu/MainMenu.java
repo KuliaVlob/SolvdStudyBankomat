@@ -14,7 +14,7 @@ public class MainMenu {
 
     public void getInputData() {
         //  try {
-        System.out.println("Enter user:           ");
+        System.out.print("Enter user: ");
         String user = sc.next();
 
 //                if (user!= getUser ) {                        //перевірка з user бази
@@ -25,7 +25,7 @@ public class MainMenu {
 //            }
 //        }
 
-        System.out.println("Enter path to file: ");             /// перевірка наяності файлу
+        System.out.print("Enter path: ");             /// перевірка наяності файлу
         String path = sc.next();
 
 
