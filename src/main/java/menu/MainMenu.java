@@ -1,16 +1,15 @@
 package menu;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import org.apache.log4j.Logger;
 
 public class MainMenu {
 
-
+    private final static Logger LOGGER = Logger.getLogger(MainMenu.class);
     private Scanner sc = new Scanner(System.in);
 
-
-    private final static Logger LOGGER = Logger.getLogger(MainMenu.class);
 
     public void getInputData() {
         //  try {
@@ -28,6 +27,8 @@ public class MainMenu {
         System.out.print("Enter path: ");             /// перевірка наяності файлу
         String path = sc.next();
 
+        chooseAction();
+
 
     }
 
@@ -42,14 +43,57 @@ public class MainMenu {
 
                 break;
             case ("W"):
-
+                withdrawFunds();
                 break;
 
             default:
                 chooseAction();
                 break;
         }
+    }
 
-        sc.close();
+    public void withdrawFunds() {
+
+        chooseNominal();
+        //знімаємо кошти з балансу
+
+    }
+
+
+    public void chooseNominal() {
+
+        System.out.println("Enter the denomination of the banknotes: 5, 10, 20, 100, 200, 500");
+        try {
+            int nominal = sc.nextInt();
+        } catch (InputMismatchException e) {
+            LOGGER.error(e.getMessage());
+        }
+
+
+    }
+
+    public void displayBalance() {
+// відображаємо баланс
+        System.out.println("================================================================");
+        reproduceSubmenu();
+    }
+
+
+    public void reproduceSubmenu() {
+        System.out.println("For withdraw funds enter:__________W");
+        System.out.println("To change the source data, enter: _С");
+        String action = sc.next();
+        switch (action) {
+            case ("W"):
+
+                break;
+            case ("C"):
+                getInputData();
+                break;
+            default:
+                break;
+        }
+
+        // sc.close();
     }
 }
