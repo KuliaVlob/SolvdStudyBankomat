@@ -1,8 +1,15 @@
+import menu.MainMenu;
+import org.apache.log4j.Logger;
+
 public class Executor {
 
-    public static void main(String[] args) {
+    final static Logger LOGGER = Logger.getLogger((Executor.class));
 
-        System.out.println("Hello!!!");
+        public static void main(String[] args) {
+
+            MainMenu mainMenu = new MainMenu();
+            mainMenu.getInputData();
+
 
     }
 }
