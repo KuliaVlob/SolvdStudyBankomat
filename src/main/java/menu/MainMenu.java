@@ -3,32 +3,26 @@ package menu;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import org.apache.log4j.Logger;
+import dao.UsersDAO;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class MainMenu {
 
-    private final static Logger LOGGER = Logger.getLogger(MainMenu.class);
+    private final static Logger LOGGER = LogManager.getLogger(MainMenu.class);
     private Scanner sc = new Scanner(System.in);
+    private String user;
 
 
     public void getInputData() {
-        //  try {
+
         System.out.print("Enter user: ");
-        String user = sc.next();
+        user = sc.next();
 
-//                if (user!= getUser ) {                        //перевірка з user бази
-//                throw new UsersException();
-//            } catch (NumberFormatException | UsersException e) {
-//                e.printStackTrace();
-//                LOGGER.error(e.getMessage());
-//            }
-//        }
-
-        System.out.print("Enter path: ");             /// перевірка наяності файлу
+        System.out.print("Enter path: ");
         String path = sc.next();
 
         chooseAction();
-
 
     }
 
@@ -40,12 +34,11 @@ public class MainMenu {
         String choosing = sc.next();
         switch (choosing) {
             case ("D"):
-
+                displayBalance();
                 break;
             case ("W"):
                 withdrawFunds();
                 break;
-
             default:
                 chooseAction();
                 break;
@@ -56,6 +49,10 @@ public class MainMenu {
 
         chooseNominal();
         //знімаємо кошти з балансу
+
+        System.out.println("Funds have been deducted from your account.");
+        System.out.println("Your account balance is:");
+        displayBalance();
 
     }
 
@@ -73,8 +70,14 @@ public class MainMenu {
     }
 
     public void displayBalance() {
-// відображаємо баланс
+
+        UsersDAO usersDAO = new UsersDAO();
+        usersDAO.getUsersByLogin(user);
+
         System.out.println("================================================================");
+        usersDAO.getUsersAmount(user);
+        System.out.println("================================================================");
+
         reproduceSubmenu();
     }
 

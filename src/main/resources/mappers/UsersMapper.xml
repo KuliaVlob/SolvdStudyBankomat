@@ -1,0 +1,17 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.IUsersDAO">
+    <resultMap id="users" type="model.Users">
+        <id property="id_user" column="id_user"/>
+        <result property="login" column="login"/>
+        <result property="total_ammount" column="total_ammount"/>
+        <result property="currency" column="currency"/>
+    </resultMap>
+    <select id="getUsersByLogin" parameterType="model.Users">
+        select login from Users where login = #{login}
+    </select>
+
+    <select id="getUsersAmmount" parameterType="model.Users">
+        select total_ammount from Users where login = #{login}
+    </select>
+</mapper>
