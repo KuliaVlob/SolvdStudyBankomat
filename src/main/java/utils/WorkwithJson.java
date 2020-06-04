@@ -1,28 +1,27 @@
 package utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.IOException;
-import java.io.InputStream;
+import java.nio.file.Paths;
+import java.util.Map;
 
 public class WorkwithJson {
 
-    public Object JsonReader( String pathtoFile) {
+    public Map JsonReader(String pathtoFile) {
 
-        Object object = null;
+        Map<?, ?> map = null;
         try {
-            ObjectMapper mapper = new ObjectMapper();
-            InputStream is = Object.class.getResourceAsStream(pathtoFile);
-            object = mapper.readValue(is, Object.class);
+            ObjectMapper objectMapper = new ObjectMapper();
+
+            map = objectMapper.readValue(Paths.get(pathtoFile).toFile(), Map.class);
         } catch (JsonProcessingException e) {
             e.getStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return object;
+        return map;
     }
 
 }
