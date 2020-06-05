@@ -1,6 +1,5 @@
 package menu;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import dao.UsersDAO;
@@ -34,9 +33,11 @@ public class MainMenu {
         String choosing = sc.next();
         switch (choosing) {
             case ("D"):
+            case ("d"):
                 displayBalance();
                 break;
             case ("W"):
+            case ("w"):
                 withdrawFunds();
                 break;
             default:
@@ -47,25 +48,11 @@ public class MainMenu {
 
     public void withdrawFunds() {
 
-        chooseNominal();
         //знімаємо кошти з балансу
 
         System.out.println("Funds have been deducted from your account.");
         System.out.println("Your account balance is:");
         displayBalance();
-
-    }
-
-
-    public void chooseNominal() {
-
-        System.out.println("Enter the denomination of the banknotes: 5, 10, 20, 100, 200, 500");
-        try {
-            int nominal = sc.nextInt();
-        } catch (InputMismatchException e) {
-            LOGGER.error(e.getMessage());
-        }
-
 
     }
 
@@ -81,22 +68,37 @@ public class MainMenu {
         reproduceSubmenu();
     }
 
-
     public void reproduceSubmenu() {
+
         System.out.println("For withdraw funds enter:__________W");
         System.out.println("To change the source data, enter: _С");
+        System.out.println("Exit<------------------------------E");
+
         String action = sc.next();
+
         switch (action) {
             case ("W"):
+            case ("w"):
 
                 break;
             case ("C"):
+            case ("c"):
+
                 getInputData();
+
                 break;
+            case ("E"):
+            case ("e"):
+                System.out.println("Thank you for using application");
+                LOGGER.info("Work completed!!!");
+                sc.close();
+                System.exit(0);
             default:
+                reproduceSubmenu();
                 break;
         }
 
-        // sc.close();
+
     }
+
 }
