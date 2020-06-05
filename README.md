@@ -1,2 +1,0 @@
-# SolvdStudyBankomat
-ProjectforStudy
