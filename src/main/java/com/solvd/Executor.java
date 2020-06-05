@@ -1,7 +1,8 @@
-import menu.MainMenu;
+package com.solvd;
+
+import com.solvd.menu.MainMenu;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import utils.WorkwithJson;
 
 public class Executor {
 
@@ -11,7 +12,6 @@ public class Executor {
 
             MainMenu mainMenu = new MainMenu();
             mainMenu.getInputData();
-
 
     }
 }

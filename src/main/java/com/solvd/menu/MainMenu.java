@@ -1,8 +1,8 @@
-package menu;
+package com.solvd.menu;
 
 import java.util.Scanner;
 
-import dao.UsersDAO;
+import com.solvd.dao.UsersDAO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

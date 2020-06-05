@@ -1,5 +1,5 @@
 {
-    "summ":"1200",
-    "banknote": "50",
-    "currency":"USD"
+    "amount":"1200",
+    "currency":"USD",
+    "banknote": "50"
   }

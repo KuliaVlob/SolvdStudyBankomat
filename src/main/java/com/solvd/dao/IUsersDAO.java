@@ -1,6 +1,6 @@
-package dao;
+package com.solvd.dao;
 
-import model.Users;
+import com.solvd.model.Users;
 
 public interface IUsersDAO {
 

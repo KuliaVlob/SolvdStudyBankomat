@@ -1,27 +1,29 @@
-package utils;
+package com.solvd.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.solvd.pojo.Transaction;
+
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.Map;
+
 
 public class WorkwithJson {
 
-    public Map JsonReader(String pathtoFile) {
+    public Transaction JsonReader(String pathtoFile) {
 
-        Map<?, ?> map = null;
+        Transaction transaction = null;
         try {
             ObjectMapper objectMapper = new ObjectMapper();
 
-            map = objectMapper.readValue(Paths.get(pathtoFile).toFile(), Map.class);
+            transaction = objectMapper.readValue(Paths.get(pathtoFile).toFile(), Transaction.class);
         } catch (JsonProcessingException e) {
             e.getStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return map;
+        return transaction;
     }
 
 }

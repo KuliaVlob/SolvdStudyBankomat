@@ -1,8 +1,8 @@
-package dao;
+package com.solvd.dao;
 
-import model.Users;
+import com.solvd.model.Users;
 import org.apache.ibatis.session.SqlSession;
-import utils.MyBatisConfigUtil;
+import com.solvd.utils.MyBatisConfigUtil;
 
 public class UsersDAO implements IUsersDAO{
 
