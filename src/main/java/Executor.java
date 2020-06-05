@@ -13,6 +13,5 @@ public class Executor {
             mainMenu.getInputData();
 
 
-
     }
 }
