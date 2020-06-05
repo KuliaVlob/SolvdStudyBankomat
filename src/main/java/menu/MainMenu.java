@@ -68,22 +68,37 @@ public class MainMenu {
         reproduceSubmenu();
     }
 
-
     public void reproduceSubmenu() {
+
         System.out.println("For withdraw funds enter:__________W");
         System.out.println("To change the source data, enter: _С");
+        System.out.println("Exit<------------------------------E");
+
         String action = sc.next();
+
         switch (action) {
             case ("W"):
+            case ("w"):
 
                 break;
             case ("C"):
+            case ("c"):
+
                 getInputData();
+
                 break;
+            case ("E"):
+            case ("e"):
+                System.out.println("Thank you for using application");
+                LOGGER.info("Work completed!!!");
+                sc.close();
+                System.exit(0);
             default:
+                reproduceSubmenu();
                 break;
         }
 
-        // sc.close();
+
     }
+
 }
