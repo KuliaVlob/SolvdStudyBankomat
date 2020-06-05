@@ -14,7 +14,7 @@ public class MainMenu {
 
 
     public void getInputData() {
-
+        LOGGER.info("Login to the program");
         System.out.print("Enter user: ");
         user = sc.next();
 
@@ -59,10 +59,10 @@ public class MainMenu {
     public void displayBalance() {
 
         UsersDAO usersDAO = new UsersDAO();
-        usersDAO.getUsersByLogin(user);
+
 
         System.out.println("================================================================");
-        usersDAO.getUsersAmount(user);
+        System.out.println(usersDAO.getUsersAmount(user));
         System.out.println("================================================================");
 
         reproduceSubmenu();

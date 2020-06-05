@@ -5,14 +5,14 @@ import java.util.Currency;
 public class Users {
     private Integer id_user;
     private String login;
-    private Currency total_ammount;
+    private Float total_ammount;
     private Integer currency;
 
     public Users() {
 
     }
 
-    public Users(Integer id_user, String login, Currency total_ammount, Integer currency) {
+    public Users(Integer id_user, String login, Float total_ammount, Integer currency) {
 
         this.id_user = id_user;
         this.login = login;
@@ -28,11 +28,11 @@ public class Users {
         this.login = login;
     }
 
-    public Currency getTotal_ammount() {
+    public Float getTotal_ammount() {
         return total_ammount;
     }
 
-    public void setTotal_ammount(Currency total_ammount) {
+    public void setTotal_ammount(Float total_ammount) {
         this.total_ammount = total_ammount;
     }
 
