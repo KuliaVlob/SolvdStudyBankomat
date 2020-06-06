@@ -20,10 +20,10 @@ public class UsersDAO implements IUsersDAO{
     }
 
     @Override
-    public Users getUsersAmount(String login) {
+    public Users getUsersAmmount(String login) {
         SqlSession session = MyBatisConfigUtil.getSqlSessionFactory().openSession();
         entityDAO = session.getMapper(DAOUsersClass);
-        Users entity =  entityDAO.getUsersAmount(login);
+        Users entity =  entityDAO.getUsersAmmount(login);
         session.close();
         return entity;
     }

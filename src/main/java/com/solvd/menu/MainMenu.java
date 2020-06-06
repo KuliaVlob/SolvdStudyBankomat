@@ -62,7 +62,7 @@ public class MainMenu {
 
 
         System.out.println("================================================================");
-        System.out.println(usersDAO.getUsersAmount(user));
+        System.out.println(usersDAO.getUsersAmmount(user));
         System.out.println("================================================================");
 
         reproduceSubmenu();
