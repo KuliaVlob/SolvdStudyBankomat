@@ -13,6 +13,6 @@ public class Executor {
 
             MainMenu mainMenu = new MainMenu();
             mainMenu.getInputData();
-            LOGGER.info("done");
+
     }
 }

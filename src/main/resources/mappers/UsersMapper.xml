@@ -7,19 +7,12 @@
         <result property="total_ammount" column="total_ammount"/>
         
     </resultMap>
-<<<<<<< HEAD
-    <select id="getUsersByLogin" parameterType="com.solvd.model.Users">
-        select login from Users where login = #{login}
-    </select>
 
-    <select id="getUsersAmmount" parameterType="com.solvd.model.Users">
-=======
     <select id="getUsersByLogin" parameterType="java.lang.String">
         select login from Users where login = #{login}
     </select>
 
     <select id="getUsersAmmount" resultMap="users">
->>>>>>> 2947c4ffa433a1c8aead49202d552626c2d86376
         select total_ammount from Users where login = #{login}
     </select>
 </mapper>
