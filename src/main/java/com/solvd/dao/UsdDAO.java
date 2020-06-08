@@ -28,7 +28,6 @@ public class UsdDAO implements IUsdDAO{
         entityDAO.updateQuantityByBanknoteUSD(entity);
         session.commit();
         session.close();
-		
 	}
 	
 }

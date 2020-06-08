@@ -35,7 +35,6 @@ public class UsersDAO implements IUsersDAO{
         entityDAO.updateAmmount(entity);
         session.commit();
         session.close();
-		
 	}
 
 
