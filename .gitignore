@@ -25,6 +25,8 @@ hs_err_pid*
 target/
 .idea/
 *.iml
+.classpath
+.project
+.settings/
 .gitignore
-db.properties
-
+logs/
