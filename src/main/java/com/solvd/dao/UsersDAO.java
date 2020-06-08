@@ -37,5 +37,4 @@ public class UsersDAO implements IUsersDAO{
         session.close();
 	}
 
-
 }

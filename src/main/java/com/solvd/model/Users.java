@@ -1,14 +1,13 @@
 package com.solvd.model;
 
+
 import java.math.*;
-import java.util.Currency;
 
 public class Users {
 
     private Integer id_user;
     private String login;
     private BigDecimal total_ammount;
-
 
 
     public Users() {
@@ -20,7 +19,6 @@ public class Users {
         this.id_user = id_user;
         this.login = login;
         this.total_ammount = total_ammount;
-       
     }
 
     public String getLogin() {
@@ -43,7 +41,7 @@ public class Users {
 
     @Override
     public String toString() {
-        return "User: " + getLogin() + ";  "+
+        return "User: " + getLogin() + ";  " +
                 "Balance : " + getTotal_ammount();
     }
 

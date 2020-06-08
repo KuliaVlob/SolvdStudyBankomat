@@ -20,7 +20,7 @@
     </environments>
     <mappers>
         <mapper resource="mappers/UsersMapper.xml"/>
-		<mapper resource="mappers/UsdMapper.xml"/>
-		<mapper resource="mappers/EurMapper.xml"/>
+        <mapper resource="mappers/UsdMapper.xml"/>
+        <mapper resource="mappers/EurMapper.xml"/>
     </mappers>
 </configuration>

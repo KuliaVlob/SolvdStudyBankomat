@@ -5,7 +5,7 @@
         <id property="id_user" column="id_user"/>
         <result property="login" column="login"/>
         <result property="total_ammount" column="total_ammount"/>
-       
+
     </resultMap>
     <select id="getUsersByLogin" resultMap="users">
         select login from Users where login = #{login}
@@ -14,8 +14,8 @@
     <select id="getUsersAmmount" resultMap="users">
         select login, total_ammount from Users where login = #{login}
     </select>
-	
-	<update id="updateAmmount" parameterType="com.solvd.model.Users">
+
+    <update id="updateAmmount" parameterType="com.solvd.model.Users">
         update Users
         set total_ammount = #{total_ammount}
         where login = #{login}

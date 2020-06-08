@@ -16,6 +16,7 @@ public class Executor {
             MainMenu mainMenu = new MainMenu();
             mainMenu.getInputData();
 
+
 //            WorkwithJson wj = new WorkwithJson();
 //            Transaction transaction = wj.JsonReader("scheme.json");
 //            System.out.println(transaction.getAmount()+ " " + transaction.getCurrency() + " " + transaction.getBanknote());
