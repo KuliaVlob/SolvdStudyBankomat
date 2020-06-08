@@ -30,18 +30,5 @@ public class WorkwithJson {
         return transaction;
     }
 
-    public Transaction convertJsontoPOJO (String jsonStr) {
-
-        Transaction transaction = null;
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            transaction = mapper.readValue(jsonStr, Transaction.class);
-            LOGGER.info("json converted to pojo");
-        } catch (JsonProcessingException e) {
-            LOGGER.error(e.getStackTrace());
-        }
-    return transaction;
-    }
-
 }
 

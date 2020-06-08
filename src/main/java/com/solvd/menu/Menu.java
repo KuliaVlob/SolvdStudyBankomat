@@ -6,20 +6,20 @@ import com.solvd.dao.UsersDAO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class MainMenu {
+public class Menu {
 
-    private final static Logger LOGGER = LogManager.getLogger(MainMenu.class);
+    private final static Logger LOGGER = LogManager.getLogger(Menu.class);
     private Scanner sc = new Scanner(System.in);
-    private String user;
+    private MethodsMenu methods = new MethodsMenu();
 
 
     public void getInputData() {
         LOGGER.info("Login to the program");
         System.out.print("Enter user: ");
-        user = sc.next();
+        methods.user = sc.next();
 
         System.out.print("Enter path: ");
-        String path = sc.next();
+        methods.path = sc.next();
 
         chooseAction();
 
@@ -34,11 +34,11 @@ public class MainMenu {
         switch (choosing) {
             case ("D"):
             case ("d"):
-                displayBalance();
+                methods.displayBalance();
                 break;
             case ("W"):
             case ("w"):
-                withdrawFunds();
+                methods.withdrawFunds();
                 break;
             default:
                 chooseAction();
@@ -46,27 +46,6 @@ public class MainMenu {
         }
     }
 
-    public void withdrawFunds() {
-
-        //знімаємо кошти з балансу
-
-        System.out.println("Funds have been deducted from your account.");
-        System.out.println("Your account balance is:");
-        displayBalance();
-
-    }
-
-    public void displayBalance() {
-
-        UsersDAO usersDAO = new UsersDAO();
-
-
-        System.out.println("================================================================");
-        System.out.println(usersDAO.getUsersAmmount(user));
-        System.out.println("================================================================");
-
-        reproduceSubmenu();
-    }
 
     public void reproduceSubmenu() {
 

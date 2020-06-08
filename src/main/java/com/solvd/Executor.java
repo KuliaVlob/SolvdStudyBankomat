@@ -1,8 +1,6 @@
 package com.solvd;
 
-import com.solvd.menu.MainMenu;
-import com.solvd.pojo.Transaction;
-import com.solvd.utils.WorkwithJson;
+import com.solvd.menu.Menu;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,8 +11,8 @@ public class Executor {
 
         public static void main(String[] args) {
 
-            MainMenu mainMenu = new MainMenu();
-            mainMenu.getInputData();
+            Menu menu = new Menu();
+            menu.getInputData();
 
 
 //            WorkwithJson wj = new WorkwithJson();
