@@ -25,6 +25,7 @@ public class MyBatisConfigUtil {
             LOGGER.info("Session creation complated successfully");
         } catch (IOException e) {
             LOGGER.info(e.getStackTrace());
+
         }
         return sqlSessionFactory;
     }

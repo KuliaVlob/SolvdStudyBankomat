@@ -1,20 +1,19 @@
 package com.solvd.model;
 
 
-import java.math.*;
 
 public class Users {
 
     private Integer id_user;
     private String login;
-    private BigDecimal total_ammount;
+    private Double total_ammount;
 
 
     public Users() {
 
     }
 
-    public Users(Integer id_user, String login, BigDecimal total_ammount) {
+    public Users(Integer id_user, String login, Double total_ammount) {
 
         this.id_user = id_user;
         this.login = login;
@@ -29,15 +28,14 @@ public class Users {
         this.login = login;
     }
 
-    public BigDecimal getTotal_ammount() {
+    public Double getTotal_ammount() {
         return total_ammount;
     }
 
-    public void setTotal_ammount(BigDecimal total_ammount) {
+    public void setTotal_ammount(Double total_ammount) {
         this.total_ammount = total_ammount;
     }
 
-  
 
     @Override
     public String toString() {

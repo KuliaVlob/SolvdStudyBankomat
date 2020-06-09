@@ -5,16 +5,16 @@ import java.util.Currency;
 
 public class Transaction {
 
-    private BigDecimal amount;
+    private Double amount;
     private String currency;
     private Integer banknote;
 
 
-    public BigDecimal getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(BigDecimal amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 

@@ -3,6 +3,7 @@ package com.solvd.menu;
 import java.util.Scanner;
 
 import com.solvd.dao.UsersDAO;
+import com.solvd.model.Users;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,9 +15,15 @@ public class Menu {
 
 
     public void getInputData() {
+
         LOGGER.info("Login to the program");
+
+        System.out.println("================================================================");
+
         System.out.print("Enter user: ");
         methods.user = sc.next();
+
+        methods.loginValidation();
 
         System.out.print("Enter path: ");
         methods.path = sc.next();
@@ -26,11 +33,12 @@ public class Menu {
     }
 
     public void chooseAction() {
-
+        System.out.println("================================================================");
         System.out.println("Display balance: D");
         System.out.println("Withdraw funds:  W");
 
         String choosing = sc.next();
+        System.out.println("================================================================");
         switch (choosing) {
             case ("D"):
             case ("d"):
@@ -48,13 +56,13 @@ public class Menu {
 
 
     public void reproduceSubmenu() {
-
+        System.out.println("================================================================");
         System.out.println("For withdraw funds enter:__________W");
         System.out.println("To change the source data, enter: _С");
         System.out.println("Exit<------------------------------E");
 
         String action = sc.next();
-
+        System.out.println("================================================================");
         switch (action) {
             case ("W"):
             case ("w"):
@@ -68,10 +76,8 @@ public class Menu {
                 break;
             case ("E"):
             case ("e"):
-                System.out.println("Thank you for using application");
-                LOGGER.info("Work completed!!!");
                 sc.close();
-                System.exit(0);
+                methods.exit();
             default:
                 reproduceSubmenu();
                 break;

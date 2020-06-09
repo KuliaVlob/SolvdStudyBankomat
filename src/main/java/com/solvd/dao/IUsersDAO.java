@@ -1,6 +1,9 @@
 package com.solvd.dao;
 
 import com.solvd.model.Users;
+import org.apache.ibatis.annotations.Param;
+
+import java.math.BigDecimal;
 
 public interface IUsersDAO {
 
@@ -8,7 +11,7 @@ public interface IUsersDAO {
 
     Users getUsersAmmount(String login);
 
-    void updateAmmount(Users entity);
-
+    void updateAmmount(@Param("total_ammount")Double total_ammount,
+                       @Param("login")String login);
 }
 

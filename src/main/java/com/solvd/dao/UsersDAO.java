@@ -4,6 +4,8 @@ import com.solvd.model.Users;
 import org.apache.ibatis.session.SqlSession;
 import com.solvd.utils.MyBatisConfigUtil;
 
+import java.math.BigDecimal;
+
 public class UsersDAO implements IUsersDAO{
 
     private IUsersDAO entityDAO;
@@ -27,12 +29,12 @@ public class UsersDAO implements IUsersDAO{
         session.close();
         return entity;
     }
-    
+
     @Override
-	public void updateAmmount(Users entity) {
+	public void updateAmmount(Double total_ammount, String login) {
 		SqlSession session = MyBatisConfigUtil.getSqlSessionFactory().openSession();
         entityDAO = session.getMapper(DAOUsersClass);
-        entityDAO.updateAmmount(entity);
+        entityDAO.updateAmmount(total_ammount, login);
         session.commit();
         session.close();
 	}
