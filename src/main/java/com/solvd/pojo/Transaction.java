@@ -1,20 +1,18 @@
 package com.solvd.pojo;
 
-import java.math.BigDecimal;
-import java.util.Currency;
 
 public class Transaction {
 
-    private Double amount;
+    private Integer amount;
     private String currency;
     private Integer banknote;
 
 
-    public Double getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
     }
 
