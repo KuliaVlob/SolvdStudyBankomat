@@ -1,5 +1,6 @@
 package com.solvd.menu;
 
+import com.solvd.dao.UsdDAO;
 import com.solvd.dao.UsersDAO;
 import com.solvd.model.Users;
 import com.solvd.pojo.Transaction;
@@ -20,10 +21,12 @@ public class MethodsMenu {
     private Double amount;
     private Users users;
 
-//scheme.json
+    //scheme.json
     public void withdrawFunds() {
         users.setLogin(user);
+
         Transaction transaction = workwithJson.JsonReader(path);
+
         amount = usersDAO.getUsersAmmount(user).getTotal_ammount();
 
         if (amount >= transaction.getAmount()) {
@@ -100,6 +103,25 @@ public class MethodsMenu {
         } else {
             System.out.println("Уou entered an incorrect login");
             menu.getInputData();
+        }
+    }
+
+    public void getBanknote() {
+
+        String path = "scheme.json";
+        Transaction transaction = workwithJson.JsonReader(path);
+        UsdDAO usdDAO = new UsdDAO();
+       String currency = transaction.getCurrency();
+        if (currency == "USD") {
+            amount = usersDAO.getUsersAmmount(user).getTotal_ammount();
+            int banknote = usdDAO.getQuantityByBanknoteUSD(transaction.getBanknote()).getBanknote();
+           // double banknoteAmmount = usdDAO.getQuantityByBanknoteUSD(transaction.getBanknote()).getQuantity();
+            System.out.println(transaction.getAmount() + " " + transaction.getCurrency() + " " + transaction.getBanknote());
+            System.out.println(usdDAO.getQuantityByBanknoteUSD(transaction.getBanknote()));
+            System.out.println(amount + " " + banknote + " " + " ");
+            //System.out.println(transaction.getBanknote());
+        } else {
+
         }
     }
 
