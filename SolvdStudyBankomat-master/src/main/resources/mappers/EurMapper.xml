@@ -1,0 +1,19 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.solvd.dao.IEurDAO">
+    <resultMap id="eur" type="com.solvd.model.Eur">
+        <id property="id" column="id"/>
+        <result property="banknote" column="banknote"/>
+        <result property="quantity" column="quantity"/>
+       
+    </resultMap>
+    <select id="getQuantityByBanknoteEUR" resultMap="eur">
+        select banknote, quantity from EUR where banknote = #{banknote}
+    </select>
+	
+	<update id="updateQuantityByBanknoteEUR" parameterType="com.solvd.model.Eur">
+        update EUR
+        set quantity = #{quantity}
+        where banknote = #{banknote}
+    </update>
+</mapper>
