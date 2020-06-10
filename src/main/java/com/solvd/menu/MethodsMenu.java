@@ -7,7 +7,8 @@ import com.solvd.utils.WorkwithJson;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Scanner;
 
 
@@ -23,32 +24,33 @@ public class MethodsMenu {
     public void withdrawFunds() {
 
 
-        Transaction transaction = workwithJson.JsonReader(path);
+        Transaction transaction = workwithJson.JsonReader(path + ".json");
 
         LOGGER.info("Get data from file: " + transaction.getAmount() +
-                transaction.getCurrency() + " Banknote " + transaction.getBanknote());
-
-        //  LOGGER.info(usersDAO.getUsersByLogin(user));
-
+                transaction.getCurrency() + " Banknote : " + transaction.getBanknote());
         amount = usersDAO.getUsersAmmount(user).getTotal_ammount();
+        //  LOGGER.info(usersDAO.getUsersByLogin(user));
+        switch (transaction.getCurrency()) {
+        
+        case ("USD"):
+        	
 
         // LOGGER.info(amount);
 
         if (amount >= transaction.getAmount()) {
             amount -= transaction.getAmount();
 
-            //  LOGGER.info("Результат віднімання" + amount);
+            //  LOGGER.info("Р РµР·СѓР»СЊС‚Р°С‚ РІС–РґРЅС–РјР°РЅРЅСЏ" + amount);
 
             users.setTotal_ammount(amount);
             users.setLogin(user);
 
-            //   LOGGER.info("Перевірчка чи просеталось" + users.getTotal_ammount() + " " + users.getLogin());
+            //   LOGGER.info("РџРµСЂРµРІС–СЂС‡РєР° С‡Рё РїСЂРѕСЃРµС‚Р°Р»РѕСЃСЊ" + users.getTotal_ammount() + " " + users.getLogin());
 
             usersDAO.updateAmmount(users.getTotal_ammount(), users.getLogin());
 
             //LOGGER.info("Check updated" + usersDAO.getUsersByLogin(user));
-
-//scheme.json
+          //scheme.json
         } else {
             LOGGER.info("The amount verification was not validated");
             System.out.println("Not enough money in your account");
@@ -60,10 +62,63 @@ public class MethodsMenu {
 
         displayBalance();
 
+                break;
+        
+        case ("EUR"):
+        
+        	 
+//        	 converted to eur ammount from db
+        	 amount = converterToEuro(amount);
+        	 
+        	 if (amount >= transaction.getAmount()) {
+                 amount -= transaction.getAmount();
+//                 System.out.println("minus: " + amount);
+                 
+//                 new summ in eur convert to usd
+                 amount = converterToUsd(amount);
+                 
+// rounding usd summ to 2 signs after comma; convert to bigDecimal and back to Double
+                 amount = new BigDecimal
+                 		(amount).setScale(2, RoundingMode.HALF_UP).doubleValue();
+//                 System.out.println("New double: " + amount);
+                 //  LOGGER.info("Р РµР·СѓР»СЊС‚Р°С‚ РІС–РґРЅС–РјР°РЅРЅСЏ" + amount);
+
+                 users.setTotal_ammount(amount);
+                 users.setLogin(user);
+
+                 //   LOGGER.info("РџРµСЂРµРІС–СЂС‡РєР° С‡Рё РїСЂРѕСЃРµС‚Р°Р»РѕСЃСЊ" + users.getTotal_ammount() + " " + users.getLogin());
+
+                 usersDAO.updateAmmount(users.getTotal_ammount(), users.getLogin());
+
+                 //LOGGER.info("Check updated" + usersDAO.getUsersByLogin(user));
+               //scheme.json
+             } else {
+                  
+                 sumReValidation();
+             }
+
+             System.out.println("Funds have been deducted from your account.");
+             System.out.println("Your account balance is:");
+
+             displayBalance();
+        	
+        	LOGGER.info("Still working on this part");
+        System.exit(0);
+
+            break;
+            
+        default:
+        	LOGGER.info("Unknown currency type. The session is closed.");
+        	System.exit(0);
+            break;
+       
+        }
     }
 
 
-    public void displayBalance() {
+   
+
+	public void displayBalance() {
         Menu menu = new Menu();
 
         System.out.println("================================================================");
@@ -74,7 +129,7 @@ public class MethodsMenu {
 
     }
 
-    public Double converterToEuro() {
+    public Double converterToEuro(Double amount) {
 
         Double coefficient = 1.133;
         Double convert = amount * coefficient;
@@ -85,6 +140,16 @@ public class MethodsMenu {
 
     }
 
+    public Double converterToUsd(Double amount) {
+
+        Double coefficient = 1.133;
+        Double convert = amount / coefficient;
+
+        LOGGER.info("The amount was converted into Usd");
+        LOGGER.info(convert);
+        return convert;
+
+    }
 
     public void sumReValidation() {
         Scanner sc = new Scanner(System.in);
@@ -116,7 +181,7 @@ public class MethodsMenu {
         if (usersDAO.getUsersByLogin(user) != null) {
             LOGGER.info("The login check has been validated");
         } else {
-            System.out.println("Уou entered an incorrect login");
+            System.out.println("РЈou entered an incorrect login");
             menu.getInputData();
         }
     }
