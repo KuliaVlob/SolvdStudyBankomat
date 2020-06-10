@@ -109,17 +109,23 @@ public class MethodsMenu {
     public void getBanknote() {
 
         String path = "scheme.json";
+        String user = "Dorosh";
         Transaction transaction = workwithJson.JsonReader(path);
         UsdDAO usdDAO = new UsdDAO();
-       String currency = transaction.getCurrency();
-        if (currency == "USD") {
+        if (new String(transaction.getCurrency()).equals("USD")) {
             amount = usersDAO.getUsersAmmount(user).getTotal_ammount();
-            int banknote = usdDAO.getQuantityByBanknoteUSD(transaction.getBanknote()).getBanknote();
-           // double banknoteAmmount = usdDAO.getQuantityByBanknoteUSD(transaction.getBanknote()).getQuantity();
-            System.out.println(transaction.getAmount() + " " + transaction.getCurrency() + " " + transaction.getBanknote());
-            System.out.println(usdDAO.getQuantityByBanknoteUSD(transaction.getBanknote()));
-            System.out.println(amount + " " + banknote + " " + " ");
-            //System.out.println(transaction.getBanknote());
+            double sumForGeting = transaction.getAmount();
+            Integer banknote = usdDAO.getQuantityByBanknoteUSD(transaction.getBanknote()).getBanknote();
+            double banknoteAmount = usdDAO.getQuantityByBanknoteUSD(transaction.getBanknote()).getQuantity();
+            System.out.println("Сума на рахкну " + amount + " сума яку треба зняти  " + sumForGeting +
+                    " номінал " + banknote + " сума банкнот " + " " + banknoteAmount);
+
+            if (sumForGeting <= banknoteAmount) {
+                withdrawFunds();
+                // тут має бути апдейт  banknoteAmount  в базі даних
+            } else {
+            }
+
         } else {
 
         }
