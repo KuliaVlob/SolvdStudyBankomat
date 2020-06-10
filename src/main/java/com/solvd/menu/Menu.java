@@ -2,8 +2,7 @@ package com.solvd.menu;
 
 import java.util.Scanner;
 
-import com.solvd.dao.UsersDAO;
-import com.solvd.model.Users;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -38,7 +37,7 @@ public class Menu {
         System.out.println("Withdraw funds:  W");
 
         String choosing = sc.next();
-        System.out.println("================================================================");
+
         switch (choosing) {
             case ("D"):
             case ("d"):
@@ -62,17 +61,15 @@ public class Menu {
         System.out.println("Exit<------------------------------E");
 
         String action = sc.next();
-        System.out.println("================================================================");
+
         switch (action) {
             case ("W"):
             case ("w"):
-
+                methods.withdrawFunds();
                 break;
             case ("C"):
             case ("c"):
-
                 getInputData();
-
                 break;
             case ("E"):
             case ("e"):

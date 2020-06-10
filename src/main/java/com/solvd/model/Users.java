@@ -8,7 +8,6 @@ public class Users {
     private String login;
     private Double total_ammount;
 
-
     public Users() {
 
     }

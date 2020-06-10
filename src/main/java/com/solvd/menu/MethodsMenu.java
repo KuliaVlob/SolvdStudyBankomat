@@ -16,39 +16,22 @@ public class MethodsMenu {
     private UsersDAO usersDAO = new UsersDAO();
     protected String user;
     protected String path;
-    private WorkwithJson workwithJson = new WorkwithJson();
+    protected WorkwithJson workwithJson = new WorkwithJson();
     private Double amount;
-    Users users = new Users();
-
-    public void withdrawFunds() {
-
-
-        Transaction transaction = workwithJson.JsonReader(path);
-
-        LOGGER.info("Get data from file: " + transaction.getAmount() +
-                transaction.getCurrency() + " Banknote " + transaction.getBanknote());
-
-        //  LOGGER.info(usersDAO.getUsersByLogin(user));
-
-        amount = usersDAO.getUsersAmmount(user).getTotal_ammount();
-
-        // LOGGER.info(amount);
-
-        if (amount >= transaction.getAmount()) {
-            amount -= transaction.getAmount();
-
-            //  LOGGER.info("Результат віднімання" + amount);
-
-            users.setTotal_ammount(amount);
-            users.setLogin(user);
-
-            //   LOGGER.info("Перевірчка чи просеталось" + users.getTotal_ammount() + " " + users.getLogin());
-
-            usersDAO.updateAmmount(users.getTotal_ammount(), users.getLogin());
-
-            //LOGGER.info("Check updated" + usersDAO.getUsersByLogin(user));
+    private Users users;
 
 //scheme.json
+    public void withdrawFunds() {
+        users.setLogin(user);
+        Transaction transaction = workwithJson.JsonReader(path);
+        amount = usersDAO.getUsersAmmount(user).getTotal_ammount();
+
+        if (amount >= transaction.getAmount()) {
+
+            amount -= transaction.getAmount();
+            users.setTotal_ammount(amount);
+            usersDAO.updateAmmount(users.getTotal_ammount(), users.getLogin());
+
         } else {
             LOGGER.info("The amount verification was not validated");
             System.out.println("Not enough money in your account");
@@ -68,7 +51,6 @@ public class MethodsMenu {
 
         System.out.println("================================================================");
         System.out.println(usersDAO.getUsersAmmount(user));
-        System.out.println("================================================================");
 
         menu.reproduceSubmenu();
 
@@ -77,8 +59,8 @@ public class MethodsMenu {
     public Double converterToEuro() {
 
         Double coefficient = 1.133;
+        amount = usersDAO.getUsersAmmount(user).getTotal_ammount();
         Double convert = amount * coefficient;
-
         LOGGER.info("The amount was converted into Euros");
         LOGGER.info(convert);
         return convert;
