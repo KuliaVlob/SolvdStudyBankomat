@@ -12,12 +12,7 @@ public class Users {
 
     }
 
-    public Users(Integer id_user, String login, Double total_ammount) {
-
-        this.id_user = id_user;
-        this.login = login;
-        this.total_ammount = total_ammount;
-    }
+  
 
     public String getLogin() {
         return login;
