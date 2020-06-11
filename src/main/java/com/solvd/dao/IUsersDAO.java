@@ -3,7 +3,6 @@ package com.solvd.dao;
 import com.solvd.model.Users;
 import org.apache.ibatis.annotations.Param;
 
-import java.math.BigDecimal;
 
 public interface IUsersDAO {
 

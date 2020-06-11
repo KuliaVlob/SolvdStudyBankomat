@@ -32,4 +32,6 @@ public class Transaction {
         this.banknote = banknote;
     }
 
+    public static class DataATM {
+    }
 }

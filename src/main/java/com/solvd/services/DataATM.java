@@ -1,17 +1,18 @@
-package com.solvd.menu;
-
-import java.util.Scanner;
-
+package com.solvd.services;
 
 import com.solvd.pojo.Transaction;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class Menu {
+import java.util.Scanner;
 
-    private final static Logger LOGGER = LogManager.getLogger(Menu.class);
+public class DataATM {
+
+    private final static Logger LOGGER = LogManager.getLogger(DataATM.class);
     private Scanner sc = new Scanner(System.in);
-    private MethodsMenu methods = new MethodsMenu();
+    ServicesATM servicesATM = new ServicesATM();
+    Validation validation = new Validation();
+
 
 
     public void getInputData() {
@@ -19,18 +20,19 @@ public class Menu {
         LOGGER.info("Login to the program");
 
         System.out.println("================================================================");
-
         System.out.print("Enter user: ");
-        methods.user = sc.next();
+        servicesATM.login = sc.next();
 
-        methods.loginValidation();
+        validation.loginValidation(servicesATM);
 
         System.out.print("Enter path: ");
-        methods.path = sc.next();
-        Transaction transaction = methods.workwithJson.JsonReader(methods.path + ".json");
+        servicesATM.path = sc.next();
+        Transaction transaction = servicesATM.workwithJson.JsonReader(servicesATM.path + ".json");
+
         chooseAction();
 
     }
+
 
     public void chooseAction() {
         System.out.println("================================================================");
@@ -42,11 +44,11 @@ public class Menu {
         switch (choosing) {
             case ("D"):
             case ("d"):
-                methods.displayBalance();
+                servicesATM.displayBalance();
                 break;
             case ("W"):
             case ("w"):
-                methods.withdrawFunds();
+                servicesATM.withdrawFunds();
                 break;
             default:
                 chooseAction();
@@ -57,17 +59,12 @@ public class Menu {
 
     public void reproduceSubmenu() {
         System.out.println("================================================================");
-        System.out.println("For withdraw funds enter:__________W");
         System.out.println("To change the source data, enter: _С");
         System.out.println("Exit<------------------------------E");
 
         String action = sc.next();
 
         switch (action) {
-            case ("W"):
-            case ("w"):
-                methods.withdrawFunds();
-                break;
             case ("C"):
             case ("c"):
                 getInputData();
@@ -75,7 +72,7 @@ public class Menu {
             case ("E"):
             case ("e"):
                 sc.close();
-                methods.exit();
+                exit();
             default:
                 reproduceSubmenu();
                 break;
@@ -83,5 +80,14 @@ public class Menu {
 
 
     }
+
+    public void exit() {
+        System.out.println("================================================================");
+        System.out.println("Thank you for using application");
+        LOGGER.info("Work completed!!!");
+        System.out.println("================================================================");
+        System.exit(0);
+    }
+
 
 }

@@ -22,115 +22,89 @@ public class MethodsMenu {
     private Double amount;
     private Users users;
 
-    //scheme.json
+
     public void withdrawFunds() {
-        users.setLogin(user);
-
         Transaction transaction = workwithJson.JsonReader(path + ".json");
-
-<<<<<<< HEAD
-=======
         LOGGER.info("Get data from file: " + transaction.getAmount() +
                 transaction.getCurrency() + " Banknote : " + transaction.getBanknote());
->>>>>>> f5168c9333d9a9061a5e3a17bb3d4eb4085f11b8
+
         amount = usersDAO.getUsersAmmount(user).getTotal_ammount();
-        //  LOGGER.info(usersDAO.getUsersByLogin(user));
+
         switch (transaction.getCurrency()) {
-        
-        case ("USD"):
-        	
 
-        if (amount >= transaction.getAmount()) {
-<<<<<<< HEAD
-=======
-            amount -= transaction.getAmount();
+            case ("USD"):
 
-            //  LOGGER.info("Р РµР·СѓР»СЊС‚Р°С‚ РІС–РґРЅС–РјР°РЅРЅСЏ" + amount);
->>>>>>> f5168c9333d9a9061a5e3a17bb3d4eb4085f11b8
 
-            amount -= transaction.getAmount();
-            users.setTotal_ammount(amount);
-<<<<<<< HEAD
-            usersDAO.updateAmmount(users.getTotal_ammount(), users.getLogin());
+                if (amount >= transaction.getAmount()) {
 
-=======
-            users.setLogin(user);
+                    amount -= transaction.getAmount();
 
-            //   LOGGER.info("РџРµСЂРµРІС–СЂС‡РєР° С‡Рё РїСЂРѕСЃРµС‚Р°Р»РѕСЃСЊ" + users.getTotal_ammount() + " " + users.getLogin());
+                    usersDAO.updateAmmount(users.getTotal_ammount(), users.getLogin());
 
-            usersDAO.updateAmmount(users.getTotal_ammount(), users.getLogin());
+                    //LOGGER.info("Check updated" + usersDAO.getUsersByLogin(user));
+                    //a.json
 
-            //LOGGER.info("Check updated" + usersDAO.getUsersByLogin(user));
-          //scheme.json
->>>>>>> f5168c9333d9a9061a5e3a17bb3d4eb4085f11b8
-        } else {
-            LOGGER.info("The amount verification was not validated");
-            System.out.println("Not enough money in your account");
-            sumReValidation();
-        }
+                } else {
+                    LOGGER.info("The amount verification was not validated");
+                    System.out.println("Not enough money in your account");
+                    sumReValidation();
+                }
 
-        System.out.println("Funds have been deducted from your account.");
-        System.out.println("Your account balance is:");
+                System.out.println("Funds have been deducted from your account.");
+                System.out.println("Your account balance is:");
 
-        displayBalance();
+                displayBalance();
 
                 break;
-        
-        case ("EUR"):
-        
-        	 
+
+            case ("EUR"):
+
+
 //        	 converted to eur ammount from db
-        	 amount = converterToEuro(amount);
-        	 
-        	 if (amount >= transaction.getAmount()) {
-                 amount -= transaction.getAmount();
+                amount = converterToEuro(amount);
+
+                if (amount >= transaction.getAmount()) {
+                    amount -= transaction.getAmount();
 //                 System.out.println("minus: " + amount);
-                 
+
 //                 new summ in eur convert to usd
-                 amount = converterToUsd(amount);
-                 
+                    amount = converterToUsd(amount);
+
 // rounding usd summ to 2 signs after comma; convert to bigDecimal and back to Double
-                 amount = new BigDecimal
-                 		(amount).setScale(2, RoundingMode.HALF_UP).doubleValue();
+                    amount = new BigDecimal
+                            (amount).setScale(2, RoundingMode.HALF_UP).doubleValue();
 //                 System.out.println("New double: " + amount);
-                 //  LOGGER.info("Р РµР·СѓР»СЊС‚Р°С‚ РІС–РґРЅС–РјР°РЅРЅСЏ" + amount);
 
-                 users.setTotal_ammount(amount);
-                 users.setLogin(user);
 
-                 //   LOGGER.info("РџРµСЂРµРІС–СЂС‡РєР° С‡Рё РїСЂРѕСЃРµС‚Р°Р»РѕСЃСЊ" + users.getTotal_ammount() + " " + users.getLogin());
+                    users.setTotal_ammount(amount);
+                    users.setLogin(user);
+                    usersDAO.updateAmmount(users.getTotal_ammount(), users.getLogin());
 
-                 usersDAO.updateAmmount(users.getTotal_ammount(), users.getLogin());
+                } else {
 
-                 //LOGGER.info("Check updated" + usersDAO.getUsersByLogin(user));
-               //scheme.json
-             } else {
-                  
-                 sumReValidation();
-             }
+                    sumReValidation();
+                }
 
-             System.out.println("Funds have been deducted from your account.");
-             System.out.println("Your account balance is:");
+                System.out.println("Funds have been deducted from your account.");
+                System.out.println("Your account balance is:");
 
-             displayBalance();
-        	
-        	LOGGER.info("Still working on this part");
-        System.exit(0);
+                displayBalance();
 
-            break;
-            
-        default:
-        	LOGGER.info("Unknown currency type. The session is closed.");
-        	System.exit(0);
-            break;
-       
+                LOGGER.info("Still working on this part");
+                System.exit(0);
+
+                break;
+
+            default:
+                LOGGER.info("Unknown currency type. The session is closed.");
+                System.exit(0);
+                break;
+
         }
     }
 
 
-   
-
-	public void displayBalance() {
+    public void displayBalance() {
         Menu menu = new Menu();
 
         System.out.println("================================================================");
@@ -192,35 +166,12 @@ public class MethodsMenu {
         if (usersDAO.getUsersByLogin(user) != null) {
             LOGGER.info("The login check has been validated");
         } else {
-            System.out.println("РЈou entered an incorrect login");
+            System.out.println("You entered an incorrect login");
             menu.getInputData();
         }
     }
 
-    public void getBanknote() {
 
-        String path = "scheme.json";
-        String user = "Dorosh";
-        Transaction transaction = workwithJson.JsonReader(path);
-        UsdDAO usdDAO = new UsdDAO();
-        if (new String(transaction.getCurrency()).equals("USD")) {
-            amount = usersDAO.getUsersAmmount(user).getTotal_ammount();
-            double sumForGeting = transaction.getAmount();
-            Integer banknote = usdDAO.getQuantityByBanknoteUSD(transaction.getBanknote()).getBanknote();
-            double banknoteAmount = usdDAO.getQuantityByBanknoteUSD(transaction.getBanknote()).getQuantity();
-            System.out.println("Сума на рахкну " + amount + " сума яку треба зняти  " + sumForGeting +
-                    " номінал " + banknote + " сума банкнот " + " " + banknoteAmount);
-
-            if (sumForGeting <= banknoteAmount) {
-                withdrawFunds();
-                // тут має бути апдейт  banknoteAmount  в базі даних
-            } else {
-            }
-
-        } else {
-
-        }
-    }
 
 
 }
