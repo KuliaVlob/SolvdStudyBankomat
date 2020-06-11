@@ -9,26 +9,24 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.nio.file.Paths;
 
-
 public class WorkwithJson {
 
-    private static final Logger LOGGER = LogManager.getLogger(WorkwithJson.class);
+	private static final Logger LOGGER = LogManager.getLogger(WorkwithJson.class);
 
-    public Transaction JsonReader(String pathtoFile) {
+	public Transaction JsonReader(String pathtoFile) {
 
-        Transaction transaction = null;
-        try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            transaction = objectMapper.readValue(Paths.get(pathtoFile).toFile(), Transaction.class);
-            LOGGER.info("file already read");
-        } catch (JsonProcessingException e) {
-           LOGGER.error(e.getStackTrace());
-        } catch (IOException e) {
-            LOGGER.error(e.getStackTrace());
-        }
+		Transaction transaction = null;
+		try {
+			ObjectMapper objectMapper = new ObjectMapper();
+			transaction = objectMapper.readValue(Paths.get(pathtoFile).toFile(), Transaction.class);
+			LOGGER.info("File is already read.");
+		} catch (JsonProcessingException e) {
+			LOGGER.error(e.getStackTrace());
+		} catch (IOException e) {
+			LOGGER.error(e.getStackTrace());
+		}
 
-        return transaction;
-    }
+		return transaction;
+	}
 
 }
-
