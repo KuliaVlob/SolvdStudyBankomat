@@ -16,26 +16,27 @@ public class MethodsMenu {
 
 	protected String user;
 	protected String path;
-	private Double amount;
+	private Double ammount;
 	private WorkwithJson workwithJson = new WorkwithJson();
 	private UsersDAO usersDAO = new UsersDAO();
 	Users users = new Users();
 
 	public void withdrawFunds() {
+		
 		Transaction transaction = workwithJson.JsonReader(path + ".json");
 
 		LOGGER.info("Get data from file: " + transaction.getAmmount() + transaction.getCurrency() + " Banknote : "
 				+ transaction.getBanknote());
-		amount = usersDAO.getUsersAmmount(user).getTotal_ammount();
+		ammount = usersDAO.getUsersAmmount(user).getTotal_ammount();
 
 		switch (transaction.getCurrency()) {
 
 		case ("USD"):
 
-			if (amount >= transaction.getAmmount()) {
-				amount -= transaction.getAmmount();
+			if (ammount >= transaction.getAmmount()) {
+				ammount -= transaction.getAmmount();
 
-				users.setTotal_ammount(amount);
+				users.setTotal_ammount(ammount);
 				users.setLogin(user);
 
 				usersDAO.updateAmmount(users.getTotal_ammount(), users.getLogin());
@@ -56,18 +57,18 @@ public class MethodsMenu {
 		case ("EUR"):
 
 //        	 converted to eur ammount from db
-			amount = converterToEuro(amount);
+			ammount = converterToEuro(ammount);
 
-			if (amount >= transaction.getAmmount()) {
-				amount -= transaction.getAmmount();
+			if (ammount >= transaction.getAmmount()) {
+				ammount -= transaction.getAmmount();
 
 //                 new summ in eur convert to usd
-				amount = converterToUsd(amount);
+				ammount = converterToUsd(ammount);
 
 // rounding usd summ to 2 signs after comma; convert to bigDecimal and back to Double
-				amount = new BigDecimal(amount).setScale(2, RoundingMode.HALF_UP).doubleValue();
+				ammount = new BigDecimal(ammount).setScale(2, RoundingMode.HALF_UP).doubleValue();
 //              
-				users.setTotal_ammount(amount);
+				users.setTotal_ammount(ammount);
 				users.setLogin(user);
 
 				usersDAO.updateAmmount(users.getTotal_ammount(), users.getLogin());
@@ -107,10 +108,10 @@ public class MethodsMenu {
 
 	}
 
-	public Double converterToEuro(Double amount) {
+	public Double converterToEuro(Double ammount) {
 
 		Double coefficient = 1.133;
-		Double convert = amount * coefficient;
+		Double convert = ammount * coefficient;
 
 		LOGGER.info("The amount was converted into Euros");
 		LOGGER.info(convert);
@@ -118,12 +119,12 @@ public class MethodsMenu {
 
 	}
 
-	public Double converterToUsd(Double amount) {
+	public Double converterToUsd(Double ammount) {
 
 		Double coefficient = 1.133;
-		Double convert = amount / coefficient;
+		Double convert = ammount / coefficient;
 
-		LOGGER.info("The amount was converted into Usd");
+		LOGGER.info("The ammount was converted into Usd");
 		LOGGER.info(convert);
 		return convert;
 
@@ -158,7 +159,7 @@ public class MethodsMenu {
 		if (usersDAO.getUsersByLogin(user) != null) {
 			LOGGER.info("The login check has been validated");
 		} else {
-			System.out.println("РЈou entered an incorrect login");
+			System.out.println("You entered an incorrect login");
 			menu.getInputData();
 		}
 	}
@@ -169,7 +170,7 @@ public class MethodsMenu {
 	}
 
 	public void printProblemMessage() {
-		LOGGER.info("The amount verification was not validated");
+		LOGGER.info("The ammount verification was not validated");
 		System.out.println("Not enough money in your account");
 	}
 
