@@ -1,5 +1,6 @@
 package com.solvd.services;
 
+import com.solvd.dao.IUsdDAO;
 import com.solvd.dao.UsersDAO;
 import com.solvd.model.Users;
 import com.solvd.pojo.Transaction;
@@ -22,6 +23,7 @@ public class ServicesATM {
     protected String login;
     protected String path;
     private Validation validation = new Validation();
+    private IUsdDAO usdDAO;
 
     public void withdrawFunds() {
 
@@ -81,4 +83,44 @@ public class ServicesATM {
 
     }
 
+//    public void getBanknote() {
+//
+//        //валідація суми яка є в банкоматі чи більше рівне sumForGeting - можливо виводити це через select
+//
+//        String path = "scheme.json";
+//        String user = "Dorosh";
+//        Transaction transaction = workwithJson.JsonReader(path);
+//        if ((transaction.getCurrency()).equals("USD")) {
+//            amount = usersDAO.getUsersAmmount(user).getTotal_ammount();
+//            double sumForGeting = transaction.getAmmount();
+//            Integer banknote = usdDAO.getQuantityByBanknoteUSD(transaction.getBanknote()).getBanknote();
+//            String banknoteAmount = usdDAO.getQuantityByBanknoteUSD(transaction.getBanknote()).getQuantity();
+//            System.out.println("Сума на рахкну " + amount + " сума яку треба зняти  " + sumForGeting +
+//                    " номінал " + banknote + " сума банкнот " + " " + banknoteAmount);
+//
+//            double quantity = sumForGeting / banknote;
+//            quantity*=banknote;
+//            sumForGeting-=quantity;
+//            if (sumForGeting <= amount) {
+//                withdrawFunds(); // знімаємо гроші з рахунку
+//                // тут має бути апдейт  banknoteAmount  в базі даних
+//
+//            } else {
+//                System.out.println("банкоат видав суму " + banknoteAmount + "  по  " + banknote);
+//                sumForGeting -= banknoteAmount;
+//                // опдейт banknoteAmount  для banknote
+//
+//                //ділі можна витягнути максимальну суму яка є в банкнотах.. наприклад 500 = 50000 ..
+//                //і повторити цей алгоритм.. і так до тих пір поки не знімемо всю суму
+//
+//
+////кожен раз знімаючи купюри ми оновлюємо суми з двох таблиць
+//
+//            }
+//
+//
+//        } else {  // тут реалізація для євро
+//
+//        }
+//    }
 }
