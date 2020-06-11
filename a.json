@@ -1,5 +1,6 @@
 {
-  "ammount":10200,
-  "currency":"USD",
-  "banknote": 50
-}
+    "amount":110,
+    "currency":"USD",
+    "banknote": 50
+  }
+

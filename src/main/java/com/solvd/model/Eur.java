@@ -1,13 +1,15 @@
 package com.solvd.model;
 
 public class Eur {
-	private Integer id;
-	private Integer banknote;
-	private String quantity;
+	    private Integer id;
+	    private Integer banknote;
+	    private String quantity;
 
-	public Eur() {
 
-	}
+	    public Eur() {
+
+	    }
+
 
 	public Integer getBanknote() {
 		return banknote;
@@ -29,5 +31,6 @@ public class Eur {
 	public String toString() {
 		return "Banknote : " + getBanknote();
 	}
+
 
 }

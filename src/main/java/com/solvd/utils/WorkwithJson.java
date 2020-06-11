@@ -15,8 +15,9 @@ public class WorkwithJson {
     private static final Logger LOGGER = LogManager.getLogger(WorkwithJson.class);
     private Validation validation = new Validation();
 
-	public Transaction JsonReader(String pathtoFile) {
 
+	public Transaction JsonReader(String pathtoFile) {
+		
 
         Transaction transaction = null;
         try {
