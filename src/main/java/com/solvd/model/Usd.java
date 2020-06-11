@@ -5,14 +5,14 @@ import java.math.*;
 public class Usd {
 	    private Integer id;
 	    private Integer banknote;
-	    private BigDecimal quantity;
+	    private String quantity;
 
 
 	    public Usd() {
 
 	    }
 
-	    public Usd(Integer id, Integer banknote, BigDecimal quantity) {
+	    public Usd(Integer id, Integer banknote, String quantity) {
 
 	        this.banknote = id;
 	        this.banknote = banknote;
@@ -28,11 +28,11 @@ public class Usd {
 			this.banknote = banknote;
 		}
 
-		public BigDecimal getQuantity() {
+		public String getQuantity() {
 			return quantity;
 		}
 
-		public void setQuantity(BigDecimal quantity) {
+		public void setQuantity(String quantity) {
 			this.quantity = quantity;
 		}
 

@@ -8,9 +8,9 @@
        
     </resultMap>
     <select id="getQuantityByBanknoteUSD" resultMap="usd">
-        select banknote, quantity from USD where banknote = #{banknote}
+        select banknote, quantity from usd where banknote = #{banknote}
     </select>
-	
+
 	<update id="updateQuantityByBanknoteUSD" parameterType="com.solvd.model.Usd">
         update Usd
         set quantity = #{quantity}

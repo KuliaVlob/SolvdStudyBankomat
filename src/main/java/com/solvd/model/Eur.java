@@ -5,14 +5,14 @@ import java.math.BigDecimal;
 public class Eur {
 	    private Integer id;
 	    private Integer banknote;
-	    private BigDecimal quantity;
+	    private Integer quantity;
 
 
 	    public Eur() {
 
 	    }
 
-	    public Eur(Integer id, Integer banknote, BigDecimal quantity) {
+	    public Eur(Integer id, Integer banknote, Integer quantity) {
 
 	        this.banknote = id;
 	        this.banknote = banknote;
@@ -28,11 +28,11 @@ public class Eur {
 			this.banknote = banknote;
 		}
 
-		public BigDecimal getQuantity() {
+		public Integer getQuantity() {
 			return quantity;
 		}
 
-		public void setQuantity(BigDecimal quantity) {
+		public void setQuantity(Integer quantity) {
 			this.quantity = quantity;
 		}
 
