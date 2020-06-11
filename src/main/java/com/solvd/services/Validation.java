@@ -1,6 +1,7 @@
 package com.solvd.services;
 
 import com.solvd.dao.UsersDAO;
+import com.solvd.pojo.Transaction;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -47,6 +48,14 @@ public class Validation {
                 break;
             default:
                 dataATM.exit();
+        }
+
+    }
+
+    private void jsonDataValidation(Transaction transaction){
+        if (transaction.getBanknote()>transaction.getAmmount()){
+            LOGGER.info("Input data are incorrect");
+            System.exit(0);
         }
 
     }
