@@ -10,7 +10,6 @@ public interface IUsersDAO {
 
     Users getUsersAmmount(String login);
 
-
     void updateAmmount(@Param("total_ammount") Double total_ammount,
                        @Param("login") String login);
 }

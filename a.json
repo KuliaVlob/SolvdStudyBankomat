@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
     "amount":110,
+=======
+    "ammount":110,
+>>>>>>> 089b207df28f26dd6fa4bc73fa048d1b046c19d9
     "currency":"USD",
     "banknote": 50
   }
