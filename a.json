@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD:a.json
     "amount":110,
+=======
+    "ammount":1200,
+>>>>>>> 6a4d33e5bc27919f863c5d8c2b4c60593b274e36:scheme.json
     "currency":"USD",
     "banknote": 50
   }

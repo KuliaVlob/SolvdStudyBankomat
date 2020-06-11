@@ -29,6 +29,14 @@ public class Executor {
 //            Transaction transaction = wj.JsonReader("a.json");
 //            System.out.println(transaction.getAmount() + " " + transaction.getCurrency() + " " + transaction.getBanknote());
 //            Integer amount = transaction.getAmount();
+
+
+//            
+//            WorkwithJson wj = new WorkwithJson();
+//            Transaction transaction = wj.JsonReader("scheme.json");
+//            System.out.println(transaction.getAmmount() + " " + transaction.getCurrency() + " " + transaction.getBanknote());
+//            Integer amount = transaction.getAmmount();
+
 //            Integer banknote = transaction.getBanknote();
 //            Integer sum = 0;
 //            int quantity = 0;
@@ -37,6 +45,6 @@ public class Executor {
 //                quantity++;
 //            } while (sum < amount);
 //            System.out.println(quantity);
-
     }
+
 }
