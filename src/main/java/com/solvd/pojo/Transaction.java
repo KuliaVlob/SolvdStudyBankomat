@@ -1,35 +1,33 @@
 package com.solvd.pojo;
 
-
 public class Transaction {
 
-    private Integer amount;
-    private String currency;
-    private Integer banknote;
+	private Integer ammount;
+	private String currency;
+	private Integer banknote;
 
+	public Integer getAmmount() {
+		return ammount;
+	}
 
-    public Integer getAmount() {
-        return amount;
-    }
+	public void setAmmount(Integer ammount) {
+		this.ammount = ammount;
+	}
 
-    public void setAmount(Integer amount) {
-        this.amount = amount;
-    }
+	public String getCurrency() {
+		return currency;
+	}
 
-    public String getCurrency() {
-        return currency;
-    }
+	public void setCurrency(String currency) {
+		this.currency = currency;
+	}
 
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
+	public Integer getBanknote() {
+		return banknote;
+	}
 
-    public Integer getBanknote() {
-        return banknote;
-    }
-
-    public void setBanknote(Integer banknote) {
-        this.banknote = banknote;
-    }
+	public void setBanknote(Integer banknote) {
+		this.banknote = banknote;
+	}
 
 }

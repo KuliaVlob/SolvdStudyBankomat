@@ -15,22 +15,22 @@ public class Executor {
 
         public static void main(String[] args) {
 
-//            Menu menu = new Menu();
-//            menu.getInputData();
+            Menu menu = new Menu();
+            menu.getInputData();
 
-            
-            WorkwithJson wj = new WorkwithJson();
-            Transaction transaction = wj.JsonReader("scheme.json");
-            System.out.println(transaction.getAmount() + " " + transaction.getCurrency() + " " + transaction.getBanknote());
-            Integer amount = transaction.getAmount();
-            Integer banknote = transaction.getBanknote();
-            Integer sum = 0;
-            int quantity = 0;
-            do {
-                 sum += banknote;
-                quantity++;
-            } while (sum < amount);
-            System.out.println(quantity);
+//            
+//            WorkwithJson wj = new WorkwithJson();
+//            Transaction transaction = wj.JsonReader("scheme.json");
+//            System.out.println(transaction.getAmmount() + " " + transaction.getCurrency() + " " + transaction.getBanknote());
+//            Integer amount = transaction.getAmmount();
+//            Integer banknote = transaction.getBanknote();
+//            Integer sum = 0;
+//            int quantity = 0;
+//            do {
+//                 sum += banknote;
+//                quantity++;
+//            } while (sum < amount);
+//            System.out.println(quantity);
 
         }
 }
