@@ -2,8 +2,8 @@ package com.solvd.menu;
 
 import java.util.Scanner;
 
-import com.solvd.dao.UsersDAO;
-import com.solvd.model.Users;
+
+import com.solvd.pojo.Transaction;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -89,5 +89,6 @@ public class Menu {
 		}
 
 	}
+
 
 }

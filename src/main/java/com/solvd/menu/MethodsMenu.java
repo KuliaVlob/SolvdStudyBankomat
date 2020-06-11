@@ -13,6 +13,7 @@ import java.math.RoundingMode;
 import java.util.Scanner;
 
 public class MethodsMenu {
+
 	private static final Logger LOGGER = LogManager.getLogger(MethodsMenu.class);
 
 	protected String user;
@@ -22,79 +23,77 @@ public class MethodsMenu {
 	private UsersDAO usersDAO = new UsersDAO();
 	Users users = new Users();
 
-	public void withdrawFunds() {
-		
+    public void withdrawFunds() {
 		Transaction transaction = workwithJson.JsonReader(path + ".json");
+		LOGGER.info("Get data from file: " + transaction.getAmmount() +
+				transaction.getCurrency() + " Banknote : " + transaction.getBanknote());
 
-		LOGGER.info("Get data from file: " + transaction.getAmmount() + transaction.getCurrency() + " Banknote : "
-				+ transaction.getBanknote());
 		ammount = usersDAO.getUsersAmmount(user).getTotal_ammount();
 
 		switch (transaction.getCurrency()) {
 
-		case ("USD"):
+			case ("USD"):
 
-			if (ammount >= transaction.getAmmount()) {
-				ammount -= transaction.getAmmount();
+				if (ammount >= transaction.getAmmount()) {
+					ammount -= transaction.getAmmount();
 
-				users.setTotal_ammount(ammount);
-				users.setLogin(user);
+					users.setTotal_ammount(ammount);
+					users.setLogin(user);
 
-				usersDAO.updateAmmount(users.getTotal_ammount(), users.getLogin());
+					usersDAO.updateAmmount(users.getTotal_ammount(), users.getLogin());
 
-			} else {
+				} else {
 
-				printProblemMessage();
+					printProblemMessage();
 
-				sumReValidation();
-			}
+					sumReValidation();
+				}
 
-			printSuccessMessage();
+				printSuccessMessage();
 
-			displayBalance();
+				displayBalance();
 
-			break;
+				break;
 
-		case ("EUR"):
+			case ("EUR"):
 
 //        	 converted to eur ammount from db
-			ammount = converterToEuro(ammount);
+				ammount = converterToEuro(ammount);
 
-			if (ammount >= transaction.getAmmount()) {
-				ammount -= transaction.getAmmount();
+				if (ammount >= transaction.getAmmount()) {
+					ammount -= transaction.getAmmount();
 
 //                 new summ in eur convert to usd
-				ammount = converterToUsd(ammount);
+					ammount = converterToUsd(ammount);
 
 // rounding usd summ to 2 signs after comma; convert to bigDecimal and back to Double
-				ammount = new BigDecimal(ammount).setScale(2, RoundingMode.HALF_UP).doubleValue();
+					ammount = new BigDecimal(ammount).setScale(2, RoundingMode.HALF_UP).doubleValue();
 //              
-				users.setTotal_ammount(ammount);
-				users.setLogin(user);
+					users.setTotal_ammount(ammount);
+					users.setLogin(user);
 
-				usersDAO.updateAmmount(users.getTotal_ammount(), users.getLogin());
+					usersDAO.updateAmmount(users.getTotal_ammount(), users.getLogin());
 
-			} else {
+				} else {
 
-				printProblemMessage();
+					printProblemMessage();
 
-				sumReValidation();
-			}
+					sumReValidation();
+				}
 
-			printSuccessMessage();
+				printSuccessMessage();
 
-			displayBalance();
+				displayBalance();
 
-			break;
+				break;
 
-		default:
+			default:
 
-			LOGGER.info("Unknown currency type. The session is closed.");
+				LOGGER.info("Unknown currency type. The session is closed.");
 
-			System.exit(0);
+				System.exit(0);
 
-			break;
-
+				break;
 		}
 	}
 
@@ -104,6 +103,7 @@ public class MethodsMenu {
 		System.out.println("================================================================");
 		System.out.println(usersDAO.getUsersAmmount(user));
 		System.out.println("================================================================");
+
 
 		menu.reproduceSubmenu();
 
@@ -117,6 +117,7 @@ public class MethodsMenu {
 		LOGGER.info("The amount was converted into Euros");
 		LOGGER.info(convert);
 		return convert;
+
 
 	}
 
@@ -170,9 +171,12 @@ public class MethodsMenu {
 		System.out.println("Your account balance is:");
 	}
 
+
 	public void printProblemMessage() {
 		LOGGER.info("The ammount verification was not validated");
 		System.out.println("Not enough money in your account");
 	}
+
+
 
 }

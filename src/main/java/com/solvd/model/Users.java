@@ -2,9 +2,10 @@ package com.solvd.model;
 
 public class Users {
 
-	private Integer id_user;
-	private String login;
-	private Double total_ammount;
+    private Integer id_user;
+    private String login;
+    private Double total_ammount;
+
 
 	public Users() {
 
