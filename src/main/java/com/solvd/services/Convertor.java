@@ -15,9 +15,9 @@ public class Convertor {
     private Double convert;
 
     public Double converterToUSD(Transaction transaction) {
-        convert = transaction.getAmount()*coefficient;
+        convert = transaction.getAmmount()*coefficient;
         LOGGER.info("The amount was converted into Euros");
-        LOGGER.info( transaction.getAmount() + "------> "+convert);
+        LOGGER.info( transaction.getAmmount() + "------> "+convert);
         return convert;
     }
 

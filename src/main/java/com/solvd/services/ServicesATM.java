@@ -30,8 +30,8 @@ public class ServicesATM {
         amount = users.getTotal_ammount();
         switch (transaction.getCurrency()) {
             case ("USD"):
-                if (amount >= transaction.getAmount()) {
-                    amount -= transaction.getAmount();
+                if (amount >= transaction.getAmmount()) {
+                    amount -= transaction.getAmmount();
                     usersDAO.updateAmmount(amount, users.getLogin());
                 } else {
                     validation.sumReValidation();

@@ -33,19 +33,18 @@ public class Executor {
 //            System.out.println(transaction.getAmount() + " " + transaction.getCurrency() + " " + transaction.getBanknote());
 //            Integer amount = transaction.getAmount();
 //
-//        Usd usd = new Usd();
-//        UsdDAO usdDAO = new UsdDAO();
-//        WorkwithJson wj = new WorkwithJson();
-//        Transaction transaction = wj.JsonReader("scheme.json");
-//        System.out.println(transaction.getAmmount() + " " + transaction.getCurrency() + " " + transaction.getBanknote());
-//        Double amount = Double.valueOf(transaction.getAmmount());
-//        Integer banknote = transaction.getBanknote();
-//        List<Usd> usds = usdDAO.getUSD();
-//        System.out.println(usds);
-//        for(Usd entity: usds) {
-//            String quantity = entity.getQuantity();
-//            System.out.println(quantity);
-//        }
+        Usd usd = new Usd();
+        UsdDAO usdDAO = new UsdDAO();
+        WorkwithJson wj = new WorkwithJson();
+        Transaction transaction = wj.JsonReader("scheme.json");
+        System.out.println(transaction.getAmmount() + " " + transaction.getCurrency() + " " + transaction.getBanknote());
+        Double amount = Double.valueOf(transaction.getAmmount());
+        Integer banknote = transaction.getBanknote();
+        List<Usd> usds = usdDAO.getUSD();
+        System.out.println(usds);
+        for(Usd entity: usds) {
+            String quantity = entity.getQuantity();
+        }
 
 
     }
