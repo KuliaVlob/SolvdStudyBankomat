@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 public class Convertor {
 
-    private static final Logger LOGGER = LogManager.getLogger(ServicesATM.class);
+    private static final Logger LOGGER = LogManager.getLogger(Convertor.class);
 
 
     private Double coefficient = 1.133;

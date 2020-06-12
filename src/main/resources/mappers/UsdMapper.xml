@@ -15,6 +15,10 @@
         select quantity from usd where quantity = #{quantity}
     </select>
 
+    <select id="getAvailableBanknote" resultMap="usd">
+        select banknote, quantity from usd where quantity = #{quantity}
+    </select>
+
     <select id="getBanknoteUSD" resultMap="usd">
         select banknote from usd
     </select>

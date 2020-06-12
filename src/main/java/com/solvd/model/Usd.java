@@ -29,7 +29,10 @@ public class Usd {
 
 	@Override
 	public String toString() {
-		return "Banknote : " + getBanknote();
+		return "Banknote : " + getBanknote() +
+				 " Quantity: " + getQuantity();
+
+
 	}
 
 }

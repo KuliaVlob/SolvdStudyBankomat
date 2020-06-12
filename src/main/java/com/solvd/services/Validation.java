@@ -52,7 +52,7 @@ public class Validation {
 
     }
 
-    private void jsonDataValidation(Transaction transaction){
+    public void jsonDataValidation(Transaction transaction){
         if (transaction.getBanknote()>transaction.getAmmount()){
             LOGGER.info("Input data are incorrect");
             System.exit(0);

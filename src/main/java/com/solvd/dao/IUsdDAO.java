@@ -12,8 +12,10 @@ public interface IUsdDAO {
 
 	void updateQuantityByBanknoteUSD(Usd entity);
 
-	List<Usd> getUSD();
+	List<Usd> getAvailableBanknote (String quantity);
 
 	void getBanknoteUSD(Usd entity);
+
+
 
 }
