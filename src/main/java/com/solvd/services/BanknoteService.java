@@ -3,7 +3,6 @@ package com.solvd.services;
 import com.solvd.dao.UsdDAO;
 import com.solvd.model.Usd;
 import com.solvd.pojo.Transaction;
-import com.solvd.utils.WorkwithJson;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,18 +14,16 @@ public class BanknoteService {
 
     private Usd usd = new Usd();
     private UsdDAO usdDAO = new UsdDAO();
-    WorkwithJson workwithJson = new WorkwithJson();
-    ServicesATM servicesATM = new ServicesATM();
-    private Transaction transaction =workwithJson.JsonReader(servicesATM.path + ".json");
-    private double sumForGetingJSON = transaction.getAmmount();
-    private Integer banknoteJSON = transaction.getBanknote();
+    private double sumForGetingJSON;
+    private Integer banknoteJSON;
     private double quantity;
-    private String info = ("You get " + quantity + " By " + banknoteJSON + " banknotes");
     private static final Logger LOGGER = LogManager.getLogger(BanknoteService.class);
 
 
-        public void getBanknoteUSD(Transaction transaction) {
+    public void getBanknoteUSD(Transaction transaction) {
 
+        sumForGetingJSON = transaction.getAmmount();
+        banknoteJSON = transaction.getBanknote();
         usd = usdDAO.getQuantityByBanknoteUSD(banknoteJSON);
 
         if (usd.getQuantity().equals("yes")) {
@@ -40,7 +37,7 @@ public class BanknoteService {
                     }
                 } while (sumForGetingJSON != 0);
             } else {
-                System.out.println(info);
+                System.out.println("You get " + quantity + " By " + banknoteJSON + " banknotes");
             }
         } else {
             refuseInfo();
@@ -52,11 +49,12 @@ public class BanknoteService {
     }
 
     public void convertToBancnote() {
+
         quantity = sumForGetingJSON / banknoteJSON;
         quantity = (int) quantity;
         quantity *= banknoteJSON;
         sumForGetingJSON -= quantity;
-        System.out.println(info);
+        System.out.println("You get " + quantity + " By " + banknoteJSON + " banknotes");
     }
 
     public void refuseInfo() {

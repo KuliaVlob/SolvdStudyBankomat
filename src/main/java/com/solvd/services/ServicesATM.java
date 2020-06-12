@@ -23,14 +23,14 @@ public class ServicesATM {
     protected String login;
     protected String path;
     private Validation validation = new Validation();
-
+    private BanknoteService banknoteService =new BanknoteService();
 
 
 
     public void withdrawFunds() {
 
         Transaction transaction = workwithJson.JsonReader(path + ".json");
-    //    BanknoteService banknoteService =new BanknoteService();
+
         validation.jsonDataValidation(transaction);
         users = usersDAO.getUsersAmmount(login);
         amount = users.getTotal_ammount();
@@ -40,7 +40,7 @@ public class ServicesATM {
                 if (amount >= transaction.getAmmount()) {
                     amount -= transaction.getAmmount();
 
-                 //   banknoteService.getBanknoteUSD(transaction);
+                  banknoteService.getBanknoteUSD(transaction);
 
                     usersDAO.updateAmmount(amount, users.getLogin());
                 } else {
