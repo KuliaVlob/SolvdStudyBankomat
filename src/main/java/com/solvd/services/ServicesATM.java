@@ -19,7 +19,7 @@ public class ServicesATM {
     private Convertor convertor = new Convertor();
     protected Double amount;
     private Users users = null;
-    protected String login;
+    protected static String login;
     protected String path;
     private Validation validation = new Validation();
     private BanknoteService banknoteService = new BanknoteService();
@@ -28,7 +28,6 @@ public class ServicesATM {
     public void withdrawFunds() {
         DataATM dataATM = new DataATM();
         Transaction transaction = workwithJson.JsonReader(path + ".json");
-
         validation.jsonDataValidate(transaction);
         users = usersDAO.getUsersAmmount(login);
         amount = users.getTotal_ammount();
@@ -38,7 +37,7 @@ public class ServicesATM {
                 if (amount >= transaction.getAmmount()) {
                     amount -= transaction.getAmmount();
 
-                    banknoteService.getBanknoteUSD(transaction);
+                //    banknoteService.getBanknoteUSD(transaction);
 
                     usersDAO.updateAmmount(amount, users.getLogin());
                 } else {

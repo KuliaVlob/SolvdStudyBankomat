@@ -1,17 +1,15 @@
 package com.solvd.services;
 
-import com.solvd.dao.UsersDAO;
-import com.solvd.pojo.Transaction;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+        import com.solvd.dao.UsersDAO;
+        import com.solvd.pojo.Transaction;
+        import org.apache.logging.log4j.LogManager;
+        import org.apache.logging.log4j.Logger;
 
-import java.util.Scanner;
 
 public class Validation {
     private final static Logger LOGGER = LogManager.getLogger(Validation.class);
-    private String incorrectData = "Input data are incorrect";
     private String instruction = "To try again, log in again";
-
+    private int minBanknote = 10;
 
     public void loginValidate(ServicesATM servicesATM) {
 
@@ -28,34 +26,39 @@ public class Validation {
 
     public void pathValidate() {
         LOGGER.error("You entered incorrect path");
-        LOGGER.error(instruction);
+        System.out.println(instruction);
         System.exit(0);
     }
 
 
     public void sumReValidate() {
-        LOGGER.info("The amount verification was not validated");
+        LOGGER.error("The amount verification was not validated");
         System.out.println("Not enough money in your account");
         getValidationInfo();
     }
 
     public void jsonDataValidate(Transaction transaction) {
-        int minBanknote = 10;
-        int[] correctbanknote = {10, 20, 50, 100, 200, 500};
-        
-        if (transaction.getBanknote() > transaction.getAmmount()) {
 
+        int[] correctBanknote = {10, 20, 50, 100, 200, 500};
+
+        if (transaction.getBanknote() > transaction.getAmmount()) {
+            LOGGER.error("Banknote more than amount");
+            System.out.println("Banknote more than the amount you want" +
+                    " to withdraw from the account");
             getValidationInfo();
         }
 
-        for (Integer banknotes : correctbanknote) {
-            if (transaction.getBanknote().equals(banknotes)) {
+        for (Integer banknotes : correctBanknote) {
+            if (!transaction.getBanknote().equals(transaction.getBanknote())) {
+                LOGGER.error("Banknote is incorrect");
                 getValidationInfo();
             }
         }
-        if (transaction.getAmmount()!=(int)(transaction.getAmmount()/minBanknote)){
 
-            System.out.println(transaction.getAmmount()!=(int)(transaction.getAmmount()/minBanknote));
+        if (transaction.getAmmount() % minBanknote != 0) {
+            LOGGER.error("The amount not integer or not multiply of 10");
+            System.out.println("To withdraw money from the account," +
+                    " the amount must be an integer and a multiple of 10");
             getValidationInfo();
         }
 
@@ -63,8 +66,7 @@ public class Validation {
 
     public void getValidationInfo() {
         System.out.println("================================================================");
-        LOGGER.info(incorrectData);
-        LOGGER.error(instruction);
+        System.out.println(instruction);
         System.exit(0);
     }
 

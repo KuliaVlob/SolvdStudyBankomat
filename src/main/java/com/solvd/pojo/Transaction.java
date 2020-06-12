@@ -2,15 +2,15 @@ package com.solvd.pojo;
 
 public class Transaction {
 
-	private Integer ammount;
+	private Double ammount;
 	private String currency;
 	private Integer banknote;
 
-	public Integer getAmmount() {
+	public Double getAmmount() {
 		return ammount;
 	}
 
-	public void setAmmount(Integer ammount) {
+	public void setAmmount(Double ammount) {
 		this.ammount = ammount;
 	}
 

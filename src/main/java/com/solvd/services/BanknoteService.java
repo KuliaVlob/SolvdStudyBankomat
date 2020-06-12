@@ -31,7 +31,7 @@ public class BanknoteService {
             if ((int) sumForGetingJSON > 0) {
                 transaction.setBanknote((int) sumForGetingJSON);
                 banknoteJSON = transaction.getBanknote();
-                getAvailableBanknote();
+                //getAvailableBanknote();
                 do {
                     if (usd.getQuantity().equals("yes")) {
                         convertToBanknote();
