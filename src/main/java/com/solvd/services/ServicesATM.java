@@ -23,12 +23,11 @@ public class ServicesATM {
     protected String login;
     protected String path;
     private Validation validation = new Validation();
-    private BanknoteService banknoteService =new BanknoteService();
-
+    private BanknoteService banknoteService = new BanknoteService();
 
 
     public void withdrawFunds() {
-
+        DataATM dataATM = new DataATM();
         Transaction transaction = workwithJson.JsonReader(path + ".json");
 
         validation.jsonDataValidation(transaction);
@@ -40,13 +39,13 @@ public class ServicesATM {
                 if (amount >= transaction.getAmmount()) {
                     amount -= transaction.getAmmount();
 
-                  banknoteService.getBanknoteUSD(transaction);
+                    banknoteService.getBanknoteUSD(transaction);
 
                     usersDAO.updateAmmount(amount, users.getLogin());
                 } else {
                     validation.sumReValidation();
                 }
-                reDisplayBalance();
+                dataATM.reproduceSubmenu();
                 break;
 
             case ("EUR"):
@@ -56,11 +55,11 @@ public class ServicesATM {
                             (amount).setScale(2, RoundingMode.HALF_UP).doubleValue();
 
                     usersDAO.updateAmmount(amount, users.getLogin());
-                    reDisplayBalance();
+                    dataATM.reproduceSubmenu();
                 } else {
                     validation.sumReValidation();
                 }
-                reDisplayBalance();
+                dataATM.reproduceSubmenu();
                 break;
 
             default:
@@ -76,19 +75,22 @@ public class ServicesATM {
         DataATM dataATM = new DataATM();
 
         System.out.println("================================================================");
+        System.out.println("Your account balance is:");
         System.out.println(usersDAO.getUsersAmmount(login));
 
-        dataATM.reproduceSubmenu();
+        System.out.println("You need to re-enter the input data to perform the operations");
+        dataATM.getInputData();
+
 
     }
 
-    public void reDisplayBalance() {
-
-        System.out.println("Funds have been deducted from your account.");
-        System.out.println("Your account balance is:");
-
-        displayBalance();
-
-    }
+//    public void reDisplayBalance() {
+//
+//        System.out.println("Funds have been deducted from your account.");
+//        System.out.println("Your account balance is:");
+//
+//        displayBalance();
+//
+//    }
 
 }

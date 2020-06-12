@@ -17,5 +17,4 @@ public interface IUsdDAO {
 	void getBanknoteUSD(Usd entity);
 
 
-
 }

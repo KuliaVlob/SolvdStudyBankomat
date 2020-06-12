@@ -31,22 +31,29 @@ public class BanknoteService {
             if ((int) sumForGetingJSON > 0) {
                 transaction.setBanknote((int) sumForGetingJSON);
                 banknoteJSON = transaction.getBanknote();
+                getAvailableBanknote();
                 do {
                     if (usd.getQuantity().equals("yes")) {
                         convertToBancnote();
                     }
+                    // тут нема else.. якщо
                 } while (sumForGetingJSON != 0);
             } else {
                 System.out.println("You get " + quantity + " By " + banknoteJSON + " banknotes");
             }
         } else {
             refuseInfo();
-            List<Usd> banknote = usdDAO.getAvailableBanknote("yes");
-            System.out.println(banknote);
+            getAvailableBanknote();
             quitProgram();
         }
 
     }
+
+    public void getAvailableBanknote() {
+        List<Usd> banknote = usdDAO.getAvailableBanknote("yes");
+        System.out.println(banknote);
+    }
+
 
     public void convertToBancnote() {
 

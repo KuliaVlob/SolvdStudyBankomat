@@ -9,6 +9,8 @@ import java.util.Scanner;
 
 public class Validation {
     private final static Logger LOGGER = LogManager.getLogger(Validation.class);
+    private String incorrectData = "Input data are incorrect";
+    private String instruction = "To try again, log in again";
 
 
     public void loginValidation(ServicesATM servicesATM) {
@@ -26,7 +28,7 @@ public class Validation {
 
     public void pathValidate() {
         LOGGER.error("You entered incorrect path");
-        LOGGER.error("To try again, log in again");
+        LOGGER.error(instruction);
         System.exit(0);
     }
 
@@ -39,22 +41,16 @@ public class Validation {
         System.out.println("Not enough money in your account");
 
         System.out.println("================================================================");
-        System.out.println("Do you want to try again? Enter Y/N");
-        String ask = sc.next();
-
-        switch (ask) {
-            case ("y"):
-            case ("Y"):
-                break;
-            default:
-                dataATM.exit();
-        }
+        LOGGER.info(incorrectData);
+        LOGGER.error(instruction);
+        System.exit(0);
 
     }
 
-    public void jsonDataValidation(Transaction transaction){
-        if (transaction.getBanknote()>transaction.getAmmount()){
-            LOGGER.info("Input data are incorrect");
+    public void jsonDataValidation(Transaction transaction) {
+        if (transaction.getBanknote() > transaction.getAmmount()) {
+            LOGGER.info(incorrectData);
+            LOGGER.error(instruction);
             System.exit(0);
         }
 
