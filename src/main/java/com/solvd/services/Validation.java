@@ -40,12 +40,22 @@ public class Validation {
     }
 
     public void jsonDataValidate(Transaction transaction) {
-        int minBanknote=10;
+        int minBanknote = 10;
+        int[] correctbanknote = {10, 20, 50, 100, 200, 500};
+        
         if (transaction.getBanknote() > transaction.getAmmount()) {
+
             getValidationInfo();
         }
 
-        if (transaction.getAmmount()!=(int)transaction.getAmmount()/minBanknote){
+        for (Integer banknotes : correctbanknote) {
+            if (transaction.getBanknote().equals(banknotes)) {
+                getValidationInfo();
+            }
+        }
+        if (transaction.getAmmount()!=(int)(transaction.getAmmount()/minBanknote)){
+
+            System.out.println(transaction.getAmmount()!=(int)(transaction.getAmmount()/minBanknote));
             getValidationInfo();
         }
 

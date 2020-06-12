@@ -27,22 +27,23 @@ public class BanknoteService {
         usd = usdDAO.getQuantityByBanknoteUSD(banknoteJSON);
 
         if (usd.getQuantity().equals("yes")) {
-            convertToBancnote();
+            convertToBanknote();
             if ((int) sumForGetingJSON > 0) {
                 transaction.setBanknote((int) sumForGetingJSON);
                 banknoteJSON = transaction.getBanknote();
                 getAvailableBanknote();
                 do {
                     if (usd.getQuantity().equals("yes")) {
-                        convertToBancnote();
+                        convertToBanknote();
+                    } else {
+                        System.out.println("You are getting: " + quantity + " By: " + banknoteJSON + " banknotes");
                     }
-                    // тут нема else.. якщо
                 } while (sumForGetingJSON != 0);
             } else {
-                System.out.println("You get " + quantity + " By " + banknoteJSON + " banknotes");
+                System.out.println("You are getting: " + quantity + " By: " + banknoteJSON + " banknotes");
             }
         } else {
-            refuseInfo();
+            getRefuseInfo();
             getAvailableBanknote();
             quitProgram();
         }
@@ -55,16 +56,15 @@ public class BanknoteService {
     }
 
 
-    public void convertToBancnote() {
-
+    public void convertToBanknote() {
         quantity = sumForGetingJSON / banknoteJSON;
         quantity = (int) quantity;
         quantity *= banknoteJSON;
         sumForGetingJSON -= quantity;
-        System.out.println("You get " + quantity + " By " + banknoteJSON + " banknotes");
+        System.out.println("You are getting: " + quantity + " By: " + banknoteJSON + " banknotes");
     }
 
-    public void refuseInfo() {
+    public void getRefuseInfo() {
         System.out.println("Unfortunately, the ATM does not have the banknotes you need");
         System.out.println("The following banknotes are available at the ATM");
     }
