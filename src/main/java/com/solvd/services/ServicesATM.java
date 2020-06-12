@@ -1,6 +1,5 @@
 package com.solvd.services;
 
-import com.solvd.dao.IUsdDAO;
 import com.solvd.dao.UsersDAO;
 import com.solvd.model.Users;
 import com.solvd.pojo.Transaction;
@@ -30,7 +29,7 @@ public class ServicesATM {
         DataATM dataATM = new DataATM();
         Transaction transaction = workwithJson.JsonReader(path + ".json");
 
-        validation.jsonDataValidation(transaction);
+        validation.jsonDataValidate(transaction);
         users = usersDAO.getUsersAmmount(login);
         amount = users.getTotal_ammount();
         switch (transaction.getCurrency()) {
@@ -43,7 +42,7 @@ public class ServicesATM {
 
                     usersDAO.updateAmmount(amount, users.getLogin());
                 } else {
-                    validation.sumReValidation();
+                    validation.sumReValidate();
                 }
                 dataATM.reproduceSubmenu();
                 break;
@@ -57,7 +56,7 @@ public class ServicesATM {
                     usersDAO.updateAmmount(amount, users.getLogin());
                     dataATM.reproduceSubmenu();
                 } else {
-                    validation.sumReValidation();
+                    validation.sumReValidate();
                 }
                 dataATM.reproduceSubmenu();
                 break;
@@ -84,13 +83,5 @@ public class ServicesATM {
 
     }
 
-//    public void reDisplayBalance() {
-//
-//        System.out.println("Funds have been deducted from your account.");
-//        System.out.println("Your account balance is:");
-//
-//        displayBalance();
-//
-//    }
 
 }

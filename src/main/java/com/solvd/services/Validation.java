@@ -13,7 +13,7 @@ public class Validation {
     private String instruction = "To try again, log in again";
 
 
-    public void loginValidation(ServicesATM servicesATM) {
+    public void loginValidate(ServicesATM servicesATM) {
 
         DataATM dataATM = new DataATM();
         UsersDAO usersDAO = new UsersDAO();
@@ -33,27 +33,29 @@ public class Validation {
     }
 
 
-    public void sumReValidation() {
-        DataATM dataATM = new DataATM();
-        Scanner sc = new Scanner(System.in);
-
+    public void sumReValidate() {
         LOGGER.info("The amount verification was not validated");
         System.out.println("Not enough money in your account");
+        getValidationInfo();
+    }
 
+    public void jsonDataValidate(Transaction transaction) {
+        int minBanknote=10;
+        if (transaction.getBanknote() > transaction.getAmmount()) {
+            getValidationInfo();
+        }
+
+        if (transaction.getAmmount()!=(int)transaction.getAmmount()/minBanknote){
+            getValidationInfo();
+        }
+
+    }
+
+    public void getValidationInfo() {
         System.out.println("================================================================");
         LOGGER.info(incorrectData);
         LOGGER.error(instruction);
         System.exit(0);
-
-    }
-
-    public void jsonDataValidation(Transaction transaction) {
-        if (transaction.getBanknote() > transaction.getAmmount()) {
-            LOGGER.info(incorrectData);
-            LOGGER.error(instruction);
-            System.exit(0);
-        }
-
     }
 
 
