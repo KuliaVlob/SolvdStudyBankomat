@@ -32,19 +32,19 @@ public class ServicesATM {
         Transaction transaction = workwithJson.JsonReader(path + ".json");
 
         try {
-            Users users = usersDAO.getUsersAmmount(login);
-            Double amount = users.getTotal_ammount();
+            Users users = usersDAO.getUsersAmount(login);
+            Double amount = users.getTotal_amount();
             validation.jsonDataValidate(transaction);
 
             switch (transaction.getCurrency()) {
                 case ("USD"):
 
-                    if (amount >= transaction.getAmmount()) {
-                        amount -= transaction.getAmmount();
+                    if (amount >= transaction.getAmount()) {
+                        amount -= transaction.getAmount();
 
                         banknoteService.getBanknoteUSD(transaction);
 
-                        usersDAO.updateAmmount(amount, users.getLogin());
+                        usersDAO.updateAmount(amount, users.getLogin());
 
                         dataATM.reproduceSubmenu();
                     } else {
@@ -59,7 +59,7 @@ public class ServicesATM {
                         amount = new BigDecimal
                                 (amount).setScale(2, RoundingMode.HALF_UP).doubleValue();
 
-                        usersDAO.updateAmmount(amount, users.getLogin());
+                        usersDAO.updateAmount(amount, users.getLogin());
 
                     } else {
                         validation.sumReValidate();
@@ -86,7 +86,7 @@ public class ServicesATM {
         System.out.println("================================================================");
         System.out.println("Your account balance is:");
         try {
-            System.out.println(usersDAO.getUsersAmmount(login));
+            System.out.println(usersDAO.getUsersAmount(login));
         } catch (PersistenceException e) {
             LOGGER.error("Sorry, too many connections, please, try again later.");
             dataATM.exit();

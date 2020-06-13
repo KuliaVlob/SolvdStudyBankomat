@@ -17,7 +17,7 @@ public class JsonDataValidator {
 
     public void jsonDataValidate(Transaction transaction) {
 
-        if (transaction.getBanknote() > transaction.getAmmount()) {
+        if (transaction.getBanknote() > transaction.getAmount()) {
             LOGGER.error("Banknote more than amount, or amount is a negative value");
             System.out.println("Banknote more than the amount you want" +
                     " to withdraw from the account. Or you entered amount with a negative value");
@@ -34,7 +34,7 @@ public class JsonDataValidator {
         }
 
         int minBanknote = 10;
-        if (transaction.getAmmount() % minBanknote != 0) {
+        if (transaction.getAmount() % minBanknote != 0) {
             LOGGER.error("The amount not integer or not multiply of 10");
             System.out.println("To withdraw money from the account," +
                     " the amount must be an integer and a multiple of 10");

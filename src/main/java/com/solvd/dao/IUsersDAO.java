@@ -8,9 +8,9 @@ public interface IUsersDAO {
 
     Users getUsersByLogin(String login);
 
-    Users getUsersAmmount(String login);
+    Users getUsersAmount(String login);
 
-    void updateAmmount(@Param("total_ammount") Double total_ammount,
+    void updateAmount(@Param("total_amount") Double total_amount,
                        @Param("login") String login);
 }
 

@@ -11,13 +11,13 @@
         select login from Users where login = #{login}
     </select>
 
-    <select id="getUsersAmmount" resultMap="users">
-        select login, total_ammount from Users where login = #{login}
+    <select id="getUsersAmount" resultMap="users">
+        select login, total_amount from Users where login = #{login}
     </select>
 
-    <update id="updateAmmount" parameterType="com.solvd.model.Users">
+    <update id="updateAmount" parameterType="com.solvd.model.Users">
         update Users
-        set total_ammount = #{total_ammount}
+        set total_amount = #{total_amount}
         where login = #{login}
     </update>
 </mapper>
