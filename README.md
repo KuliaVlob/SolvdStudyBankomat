@@ -20,6 +20,11 @@ The recommended way to intall the project is to simply use [Maven](https://maven
 ```sh
 $ mvn install
 ```
+### Data Used
+
+Screenshot of data base with valid logins:
+![Screenshot](https://github.com/Iemelianova/Stuff/raw/master/inputlogins.png)
+
 ### Built With
 
 * [Maven](https://maven.apache.org/) - a software project management and comprehension tool. Based on the concept of a project object model (POM), Maven can manage a project's build, reporting and documentation from a central piece of information.
