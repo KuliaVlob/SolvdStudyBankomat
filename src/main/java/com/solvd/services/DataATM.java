@@ -1,6 +1,7 @@
 package com.solvd.services;
 
 import com.solvd.pojo.Transaction;
+import com.solvd.validator.InputDataValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,9 +11,8 @@ public class DataATM {
 
     private final static Logger LOGGER = LogManager.getLogger(DataATM.class);
     private Scanner sc = new Scanner(System.in);
-    ServicesATM servicesATM = new ServicesATM();
-    Validation validation = new Validation();
-
+    private ServicesATM servicesATM = new ServicesATM();
+    private InputDataValidator loginValidator = new InputDataValidator();
 
 
     public void getInputData() {
@@ -21,9 +21,9 @@ public class DataATM {
 
         System.out.println("================================================================");
         System.out.print("Enter user: ");
-        servicesATM.login = sc.next();
+        ServicesATM.login = sc.next();
 
-        validation.loginValidation(servicesATM);
+        loginValidator.loginValidate(servicesATM);
 
         System.out.print("Enter path: ");
         servicesATM.path = sc.next();
@@ -40,14 +40,12 @@ public class DataATM {
         System.out.println("Withdraw funds:  W");
 
         String choosing = sc.next();
-
+        choosing = choosing.toUpperCase();
         switch (choosing) {
             case ("D"):
-            case ("d"):
                 servicesATM.displayBalance();
                 break;
             case ("W"):
-            case ("w"):
                 servicesATM.withdrawFunds();
                 break;
             default:
@@ -59,18 +57,20 @@ public class DataATM {
 
     public void reproduceSubmenu() {
         System.out.println("================================================================");
-        System.out.println("To change the source data, enter: _С");
-        System.out.println("Exit<------------------------------E");
+        System.out.println("To display balance:               D");
+        System.out.println("To change the source data, enter: С");
+        System.out.println("Exit<-----------------------------E");
 
         String action = sc.next();
-
+        action = action.toUpperCase();
         switch (action) {
+            case ("D"):
+                servicesATM.displayBalance();
+                break;
             case ("C"):
-            case ("c"):
                 getInputData();
                 break;
             case ("E"):
-            case ("e"):
                 sc.close();
                 exit();
             default:

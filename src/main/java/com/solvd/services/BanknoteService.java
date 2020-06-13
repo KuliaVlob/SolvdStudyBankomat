@@ -3,6 +3,8 @@ package com.solvd.services;
 import com.solvd.dao.UsdDAO;
 import com.solvd.model.Usd;
 import com.solvd.pojo.Transaction;
+
+import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -24,40 +26,60 @@ public class BanknoteService {
 
         sumForGetingJSON = transaction.getAmmount();
         banknoteJSON = transaction.getBanknote();
+      
+        try {
         usd = usdDAO.getQuantityByBanknoteUSD(banknoteJSON);
 
         if (usd.getQuantity().equals("yes")) {
-            convertToBancnote();
+            convertToBanknote();
             if ((int) sumForGetingJSON > 0) {
                 transaction.setBanknote((int) sumForGetingJSON);
                 banknoteJSON = transaction.getBanknote();
+                //getAvailableBanknote();
                 do {
                     if (usd.getQuantity().equals("yes")) {
-                        convertToBancnote();
+                        convertToBanknote();
+                    } else {
+                        System.out.println("You are getting: " + quantity + " By: " + banknoteJSON + " banknotes");
                     }
                 } while (sumForGetingJSON != 0);
             } else {
-                System.out.println("You get " + quantity + " By " + banknoteJSON + " banknotes");
+                System.out.println("You are getting: " + quantity + " By: " + banknoteJSON + " banknotes");
             }
         } else {
-            refuseInfo();
-            List<Usd> banknote = usdDAO.getAvailableBanknote("yes");
-            System.out.println(banknote);
+            getRefuseInfo();
+            getAvailableBanknote();
             quitProgram();
         }
+        } catch (PersistenceException e) {
+        	DataATM dataATM = new DataATM();
+			LOGGER.error("Sorry, too many connections, please, try again later.");
+			dataATM.exit();
+		}
+    }
+    
 
+    public void getAvailableBanknote() {
+    	try {
+        List<Usd> banknote = usdDAO.getAvailableBanknoteUSD("yes");
+        System.out.println(banknote);
+    	} catch (PersistenceException e) {
+    		DataATM dataATM = new DataATM();
+			LOGGER.error("Sorry, too many connections, please, try again later.");
+			dataATM.exit();
+		}
     }
 
-    public void convertToBancnote() {
 
+    public void convertToBanknote() {
         quantity = sumForGetingJSON / banknoteJSON;
         quantity = (int) quantity;
         quantity *= banknoteJSON;
         sumForGetingJSON -= quantity;
-        System.out.println("You get " + quantity + " By " + banknoteJSON + " banknotes");
+        System.out.println("You are getting: " + quantity + " By: " + banknoteJSON + " banknotes");
     }
 
-    public void refuseInfo() {
+    public void getRefuseInfo() {
         System.out.println("Unfortunately, the ATM does not have the banknotes you need");
         System.out.println("The following banknotes are available at the ATM");
     }

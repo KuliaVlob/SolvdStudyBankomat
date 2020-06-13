@@ -1,10 +1,13 @@
 package com.solvd.services;
 
-import com.solvd.dao.IUsdDAO;
 import com.solvd.dao.UsersDAO;
 import com.solvd.model.Users;
 import com.solvd.pojo.Transaction;
 import com.solvd.utils.WorkwithJson;
+
+import com.solvd.validator.JsonDataValidator;
+import org.apache.ibatis.exceptions.PersistenceException;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,61 +16,66 @@ import java.math.RoundingMode;
 
 public class ServicesATM {
 
-
     private static final Logger LOGGER = LogManager.getLogger(ServicesATM.class);
     private UsersDAO usersDAO = new UsersDAO();
     protected WorkwithJson workwithJson = new WorkwithJson();
     private Convertor convertor = new Convertor();
-    protected Double amount;
-    private Users users = null;
-    protected String login;
+    public static String login;
     protected String path;
-    private Validation validation = new Validation();
-    private BanknoteService banknoteService =new BanknoteService();
-
+    private JsonDataValidator validation = new JsonDataValidator();
+    private BanknoteService banknoteService = new BanknoteService();
 
 
     public void withdrawFunds() {
 
+        DataATM dataATM = new DataATM();
         Transaction transaction = workwithJson.JsonReader(path + ".json");
 
-        validation.jsonDataValidation(transaction);
-        users = usersDAO.getUsersAmmount(login);
-        amount = users.getTotal_ammount();
-        switch (transaction.getCurrency()) {
-            case ("USD"):
+        try {
+            Users users = usersDAO.getUsersAmmount(login);
+            Double amount = users.getTotal_ammount();
+            validation.jsonDataValidate(transaction);
 
-                if (amount >= transaction.getAmmount()) {
-                    amount -= transaction.getAmmount();
+            switch (transaction.getCurrency()) {
+                case ("USD"):
 
-                  banknoteService.getBanknoteUSD(transaction);
+                    if (amount >= transaction.getAmmount()) {
+                        amount -= transaction.getAmmount();
 
-                    usersDAO.updateAmmount(amount, users.getLogin());
-                } else {
-                    validation.sumReValidation();
-                }
-                reDisplayBalance();
-                break;
+                        banknoteService.getBanknoteUSD(transaction);
 
-            case ("EUR"):
-                if (amount >= convertor.converterToUSD(transaction)) {
-                    amount -= convertor.converterToUSD(transaction);
-                    amount = new BigDecimal
-                            (amount).setScale(2, RoundingMode.HALF_UP).doubleValue();
+                        usersDAO.updateAmmount(amount, users.getLogin());
 
-                    usersDAO.updateAmmount(amount, users.getLogin());
-                    reDisplayBalance();
-                } else {
-                    validation.sumReValidation();
-                }
-                reDisplayBalance();
-                break;
+                        dataATM.reproduceSubmenu();
+                    } else {
+                        validation.sumReValidate();
+                    }
+                    dataATM.reproduceSubmenu();
+                    break;
 
-            default:
-                LOGGER.info("Unknown currency type. The session is closed.");
-                System.exit(0);
-                break;
+                case ("EUR"):
+                    if (amount >= convertor.converterToUSD(transaction)) {
+                        amount -= convertor.converterToUSD(transaction);
+                        amount = new BigDecimal
+                                (amount).setScale(2, RoundingMode.HALF_UP).doubleValue();
 
+                        usersDAO.updateAmmount(amount, users.getLogin());
+
+                    } else {
+                        validation.sumReValidate();
+                    }
+                    dataATM.reproduceSubmenu();
+                    break;
+
+                default:
+                    LOGGER.info("Unknown currency type. The session is closed.");
+                    System.exit(0);
+                    break;
+
+            }
+        } catch (PersistenceException e) {
+            LOGGER.error("Sorry, too many connections, please, try again later.");
+            dataATM.exit();
         }
     }
 
@@ -76,19 +84,17 @@ public class ServicesATM {
         DataATM dataATM = new DataATM();
 
         System.out.println("================================================================");
-        System.out.println(usersDAO.getUsersAmmount(login));
-
-        dataATM.reproduceSubmenu();
-
-    }
-
-    public void reDisplayBalance() {
-
-        System.out.println("Funds have been deducted from your account.");
         System.out.println("Your account balance is:");
-
-        displayBalance();
+        try {
+            System.out.println(usersDAO.getUsersAmmount(login));
+        } catch (PersistenceException e) {
+            LOGGER.error("Sorry, too many connections, please, try again later.");
+            dataATM.exit();
+        }
+        System.out.println("You need to re-enter the input data to perform the operations");
+        dataATM.getInputData();
 
     }
+
 
 }
