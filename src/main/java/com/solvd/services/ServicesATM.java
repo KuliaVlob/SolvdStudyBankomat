@@ -4,7 +4,10 @@ import com.solvd.dao.UsersDAO;
 import com.solvd.model.Users;
 import com.solvd.pojo.Transaction;
 import com.solvd.utils.WorkwithJson;
+
 import com.solvd.validator.JsonDataValidator;
+import org.apache.ibatis.exceptions.PersistenceException;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,47 +30,52 @@ public class ServicesATM {
 
         DataATM dataATM = new DataATM();
         Transaction transaction = workwithJson.JsonReader(path + ".json");
-        Users users = usersDAO.getUsersAmmount(login);
-        Double amount = users.getTotal_ammount();
 
-        validation.jsonDataValidate(transaction);
+        try {
+            Users users = usersDAO.getUsersAmmount(login);
+            Double amount = users.getTotal_ammount();
+            validation.jsonDataValidate(transaction);
 
-        switch (transaction.getCurrency()) {
-            case ("USD"):
+            switch (transaction.getCurrency()) {
+                case ("USD"):
 
-                if (amount >= transaction.getAmmount()) {
-                    amount -= transaction.getAmmount();
+                    if (amount >= transaction.getAmmount()) {
+                        amount -= transaction.getAmmount();
 
-                    banknoteService.getBanknoteUSD(transaction);
+                        banknoteService.getBanknoteUSD(transaction);
 
-                    usersDAO.updateAmmount(amount, users.getLogin());
+                        usersDAO.updateAmmount(amount, users.getLogin());
 
+                        dataATM.reproduceSubmenu();
+                    } else {
+                        validation.sumReValidate();
+                    }
                     dataATM.reproduceSubmenu();
-                } else {
-                    validation.sumReValidate();
-                }
-                dataATM.reproduceSubmenu();
-                break;
+                    break;
 
-            case ("EUR"):
-                if (amount >= convertor.converterToUSD(transaction)) {
-                    amount -= convertor.converterToUSD(transaction);
-                    amount = new BigDecimal
-                            (amount).setScale(2, RoundingMode.HALF_UP).doubleValue();
+                case ("EUR"):
+                    if (amount >= convertor.converterToUSD(transaction)) {
+                        amount -= convertor.converterToUSD(transaction);
+                        amount = new BigDecimal
+                                (amount).setScale(2, RoundingMode.HALF_UP).doubleValue();
 
-                    usersDAO.updateAmmount(amount, users.getLogin());
+                        usersDAO.updateAmmount(amount, users.getLogin());
 
-                } else {
-                    validation.sumReValidate();
-                }
-                dataATM.reproduceSubmenu();
-                break;
+                    } else {
+                        validation.sumReValidate();
+                    }
+                    dataATM.reproduceSubmenu();
+                    break;
 
-            default:
-                LOGGER.info("Unknown currency type. The session is closed.");
-                System.exit(0);
-                break;
+                default:
+                    LOGGER.info("Unknown currency type. The session is closed.");
+                    System.exit(0);
+                    break;
 
+            }
+        } catch (PersistenceException e) {
+            LOGGER.error("Sorry, too many connections, please, try again later.");
+            dataATM.exit();
         }
     }
 
@@ -77,8 +85,12 @@ public class ServicesATM {
 
         System.out.println("================================================================");
         System.out.println("Your account balance is:");
-        System.out.println(usersDAO.getUsersAmmount(login));
-
+        try {
+            System.out.println(usersDAO.getUsersAmmount(login));
+        } catch (PersistenceException e) {
+            LOGGER.error("Sorry, too many connections, please, try again later.");
+            dataATM.exit();
+        }
         System.out.println("You need to re-enter the input data to perform the operations");
         dataATM.getInputData();
 
