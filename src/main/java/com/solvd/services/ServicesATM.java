@@ -4,6 +4,8 @@ import com.solvd.dao.UsersDAO;
 import com.solvd.model.Users;
 import com.solvd.pojo.Transaction;
 import com.solvd.utils.WorkwithJson;
+
+import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,6 +31,7 @@ public class ServicesATM {
         DataATM dataATM = new DataATM();
         Transaction transaction = workwithJson.JsonReader(path + ".json");
         validation.jsonDataValidate(transaction);
+        try {
         users = usersDAO.getUsersAmmount(login);
         amount = users.getTotal_ammount();
         switch (transaction.getCurrency()) {
@@ -66,7 +69,12 @@ public class ServicesATM {
                 break;
 
         }
+        } catch (PersistenceException e) {
+			LOGGER.error("Sorry, too many connections, please, try again later.");
+			dataATM.exit();
+		}
     }
+        
 
 
     public void displayBalance() {
@@ -74,8 +82,12 @@ public class ServicesATM {
 
         System.out.println("================================================================");
         System.out.println("Your account balance is:");
+        try {
         System.out.println(usersDAO.getUsersAmmount(login));
-
+        } catch (PersistenceException e) {
+			LOGGER.error("Sorry, too many connections, please, try again later.");
+			dataATM.exit();
+		}
         System.out.println("You need to re-enter the input data to perform the operations");
         dataATM.getInputData();
 

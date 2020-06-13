@@ -1,5 +1,7 @@
 package com.solvd.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.solvd.model.Eur;
@@ -20,10 +22,10 @@ public class EurDAO implements IEurDAO {
 	}
 
 	@Override
-	public Eur getQuantityEur(Integer quantity) {
+	public Eur getQuantityEUR(String quantity) {
 		SqlSession session = MyBatisConfigUtil.getSqlSessionFactory().openSession();
 		entityDAO = session.getMapper(DAOEurClass);
-		Eur entity = entityDAO.getQuantityEur(quantity);
+		Eur entity = entityDAO.getQuantityEUR(quantity);
 		session.close();
 		return entity;
 	}
@@ -37,5 +39,21 @@ public class EurDAO implements IEurDAO {
 		session.close();
 
 	}
+	@Override
+	public List<Eur> getAvailableBanknoteEUR (String quantity) {
+		SqlSession session = MyBatisConfigUtil.getSqlSessionFactory().openSession();
+		entityDAO = session.getMapper(DAOEurClass);
+		List<Eur> entities= entityDAO.getAvailableBanknoteEUR(quantity);
+		session.close();
+		return entities;
+	}
 
+	@Override
+	public void getBanknoteEUR(Eur entity) {
+		SqlSession session = MyBatisConfigUtil.getSqlSessionFactory().openSession();
+		entityDAO = session.getMapper(DAOEurClass);
+		entityDAO.getBanknoteEUR(entity);
+		session.commit();
+		session.close();
+	}
 }

@@ -3,6 +3,8 @@ package com.solvd.services;
 import com.solvd.dao.UsdDAO;
 import com.solvd.model.Usd;
 import com.solvd.pojo.Transaction;
+
+import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -24,6 +26,8 @@ public class BanknoteService {
 
         sumForGetingJSON = transaction.getAmmount();
         banknoteJSON = transaction.getBanknote();
+      
+        try {
         usd = usdDAO.getQuantityByBanknoteUSD(banknoteJSON);
 
         if (usd.getQuantity().equals("yes")) {
@@ -47,12 +51,23 @@ public class BanknoteService {
             getAvailableBanknote();
             quitProgram();
         }
-
+        } catch (PersistenceException e) {
+        	DataATM dataATM = new DataATM();
+			LOGGER.error("Sorry, too many connections, please, try again later.");
+			dataATM.exit();
+		}
     }
+    
 
     public void getAvailableBanknote() {
-        List<Usd> banknote = usdDAO.getAvailableBanknote("yes");
+    	try {
+        List<Usd> banknote = usdDAO.getAvailableBanknoteUSD("yes");
         System.out.println(banknote);
+    	} catch (PersistenceException e) {
+    		DataATM dataATM = new DataATM();
+			LOGGER.error("Sorry, too many connections, please, try again later.");
+			dataATM.exit();
+		}
     }
 
 

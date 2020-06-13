@@ -15,6 +15,18 @@
         select quantity from eur where quantity = #{quantity}
     </select>
 	
+	<select id="getAvailableBanknoteEUR" resultMap="eur">
+        select banknote from eur where quantity = #{quantity}
+    </select>
+
+    <select id="getBanknoteEUR" resultMap="eur">
+        select banknote from eur
+    </select>
+
+    <select id="getEUR" resultMap="eur">
+        select * from eur
+    </select>
+	
 	<update id="updateQuantityByBanknoteEUR" parameterType="com.solvd.model.Eur">
         update eur
         set quantity = #{quantity}
