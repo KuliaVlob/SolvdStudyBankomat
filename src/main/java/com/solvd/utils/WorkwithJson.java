@@ -18,6 +18,7 @@ public class WorkwithJson {
 
 	public Transaction JsonReader(String pathtoFile) {
 
+
         Transaction transaction = null;
         try {
             ObjectMapper objectMapper = new ObjectMapper();
@@ -28,7 +29,6 @@ public class WorkwithJson {
         } catch (IOException e) {
             validation.pathValidate();
         }
-
 
 		return transaction;
 	}

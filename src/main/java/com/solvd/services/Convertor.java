@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 public class Convertor {
 
-    private static final Logger LOGGER = LogManager.getLogger(ServicesATM.class);
+    private static final Logger LOGGER = LogManager.getLogger(Convertor.class);
 
 
     private Double coefficient = 1.133;
@@ -17,7 +17,7 @@ public class Convertor {
     public Double converterToUSD(Transaction transaction) {
         convert = transaction.getAmmount()*coefficient;
         LOGGER.info("The amount was converted into Euros");
-        LOGGER.info( transaction.getAmmount() + "------> "+convert);
+        LOGGER.info( transaction.getAmmount()+ "------> "+convert);
         return convert;
     }
 

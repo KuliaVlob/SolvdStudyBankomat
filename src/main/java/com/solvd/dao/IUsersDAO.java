@@ -6,12 +6,12 @@ import org.apache.ibatis.annotations.Param;
 
 public interface IUsersDAO {
 
-	Users getUsersByLogin(String login);
+    Users getUsersByLogin(String login);
 
-	Users getUsersAmmount(String login);
+    Users getUsersAmmount(String login);
 
-    void updateAmmount(@Param("total_ammount")Double total_ammount,
-                       @Param("login")String login);
+    void updateAmmount(@Param("total_ammount") Double total_ammount,
+                       @Param("login") String login);
 }
 
 
