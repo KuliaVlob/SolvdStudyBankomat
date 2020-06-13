@@ -8,7 +8,7 @@
 
 ### Project information
 
-Data is entered through the console menu - user and path
+This project is simulation of the ATM program. Data is entered through the console menu - user and path
 to json file. Data what amount to withdraw, what denominations
 and which currency (USD / EUR) are taken from the json file. application
 checks the validity of the amount, is there a given amount on the account, if
