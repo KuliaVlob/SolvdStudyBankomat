@@ -26,7 +26,7 @@ public class JsonDataValidator {
 
         int[] correctBanknote = {10, 20, 50, 100, 200, 500};
         for (Integer banknotes : correctBanknote) {
-            if (!transaction.getBanknote().equals(transaction.getBanknote())) {
+            if (!banknotes.equals(transaction.getBanknote())) {
                 LOGGER.error("Banknote is incorrect");
                 System.out.println("Input banknote is incorrect");
                 infoOfValidation.getValidationInfo();
