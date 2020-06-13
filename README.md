@@ -1,6 +1,6 @@
 # SolvdStudyBankomat
 
-### Student  project for solvd.com
+## Student  project for solvd.com
 
 ### Project information
 
