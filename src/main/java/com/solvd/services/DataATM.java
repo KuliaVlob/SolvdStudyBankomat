@@ -1,6 +1,7 @@
 package com.solvd.services;
 
 import com.solvd.pojo.Transaction;
+import com.solvd.validator.InputDataValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,8 +11,8 @@ public class DataATM {
 
     private final static Logger LOGGER = LogManager.getLogger(DataATM.class);
     private Scanner sc = new Scanner(System.in);
-    ServicesATM servicesATM = new ServicesATM();
-    Validation validation = new Validation();
+    private ServicesATM servicesATM = new ServicesATM();
+    private InputDataValidator loginValidator = new InputDataValidator();
 
 
     public void getInputData() {
@@ -20,9 +21,9 @@ public class DataATM {
 
         System.out.println("================================================================");
         System.out.print("Enter user: ");
-        servicesATM.login = sc.next();
+        ServicesATM.login = sc.next();
 
-        validation.loginValidate(servicesATM);
+        loginValidator.loginValidate(servicesATM);
 
         System.out.print("Enter path: ");
         servicesATM.path = sc.next();

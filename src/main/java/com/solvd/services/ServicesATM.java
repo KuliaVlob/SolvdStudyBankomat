@@ -4,6 +4,7 @@ import com.solvd.dao.UsersDAO;
 import com.solvd.model.Users;
 import com.solvd.pojo.Transaction;
 import com.solvd.utils.WorkwithJson;
+import com.solvd.validator.JsonDataValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -12,34 +13,36 @@ import java.math.RoundingMode;
 
 public class ServicesATM {
 
-
     private static final Logger LOGGER = LogManager.getLogger(ServicesATM.class);
     private UsersDAO usersDAO = new UsersDAO();
     protected WorkwithJson workwithJson = new WorkwithJson();
     private Convertor convertor = new Convertor();
-    protected Double amount;
-    private Users users = null;
-    protected static String login;
+    public static String login;
     protected String path;
-    private Validation validation = new Validation();
+    private JsonDataValidator validation = new JsonDataValidator();
     private BanknoteService banknoteService = new BanknoteService();
 
 
     public void withdrawFunds() {
+
         DataATM dataATM = new DataATM();
         Transaction transaction = workwithJson.JsonReader(path + ".json");
+        Users users = usersDAO.getUsersAmmount(login);
+        Double amount = users.getTotal_ammount();
+
         validation.jsonDataValidate(transaction);
-        users = usersDAO.getUsersAmmount(login);
-        amount = users.getTotal_ammount();
+
         switch (transaction.getCurrency()) {
             case ("USD"):
 
                 if (amount >= transaction.getAmmount()) {
                     amount -= transaction.getAmmount();
 
-                //    banknoteService.getBanknoteUSD(transaction);
+                    banknoteService.getBanknoteUSD(transaction);
 
                     usersDAO.updateAmmount(amount, users.getLogin());
+
+                    dataATM.reproduceSubmenu();
                 } else {
                     validation.sumReValidate();
                 }
@@ -53,7 +56,7 @@ public class ServicesATM {
                             (amount).setScale(2, RoundingMode.HALF_UP).doubleValue();
 
                     usersDAO.updateAmmount(amount, users.getLogin());
-                    dataATM.reproduceSubmenu();
+
                 } else {
                     validation.sumReValidate();
                 }
@@ -78,7 +81,6 @@ public class ServicesATM {
 
         System.out.println("You need to re-enter the input data to perform the operations");
         dataATM.getInputData();
-
 
     }
 
