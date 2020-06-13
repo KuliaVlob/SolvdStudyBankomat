@@ -2,6 +2,8 @@
 
 ## Student  project for solvd.com
 
+![Image alt](https://github.com/Iemelianova/Stuff/raw/master/ATM.png)
+
 ### Project information
 
 Data is entered through the console menu - user and path
