@@ -91,8 +91,8 @@ public class ServicesATM {
             LOGGER.error("Sorry, too many connections, please, try again later.");
             dataATM.exit();
         }
-        System.out.println("You need to re-enter the input data to perform the operations");
-        dataATM.getInputData();
+        
+        dataATM.displayNextInfo();
 
     }
 
