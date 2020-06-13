@@ -1,8 +1,8 @@
 # SolvdStudyBankomat
 
-##Student  project for solvd.com
+### Student  project for solvd.com
 
-###Project information
+### Project information
 
 Data is entered through the console menu - user and path
 to json file. Data what amount to withdraw, what denominations
@@ -10,7 +10,7 @@ and which currency (USD / EUR) are taken from the json file. application
 checks the validity of the amount, is there a given amount on the account, if
 there are banknotes of this denomination in an ATM. If validation is successful, then the amount is issued.
 
-###Installing
+### Installing
 The recommended way to intall the project is to simply use [Maven](https://maven.apache.org/):
 
 ```sh
@@ -30,7 +30,7 @@ $ mvn install
 
 * [ElephantSQL](https://www.elephantsql.com/) - a PostgreSQL database hosting service.
 
-###Authors:
+### Authors:
 
 - Yana Dorosh;
 
@@ -38,7 +38,7 @@ $ mvn install
 
 - Iryna Iemelianova.
 
-###Gratitude:
+### Gratitude:
 
 - Special thanks to our mentor Vitali Liavitski;
 
