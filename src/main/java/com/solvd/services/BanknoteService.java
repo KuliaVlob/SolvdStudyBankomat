@@ -24,7 +24,7 @@ public class BanknoteService {
 
     public void getBanknoteUSD(Transaction transaction) {
 
-        sumForGetingJSON = transaction.getAmmount();
+        sumForGetingJSON = transaction.getAmount();
         banknoteJSON = transaction.getBanknote();
       
         try {

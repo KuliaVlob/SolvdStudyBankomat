@@ -5,7 +5,7 @@ public class Users {
 
     private Integer id_user;
     private String login;
-    private Double total_ammount;
+    private Double total_amount;
 
 
 	public Users() {
@@ -20,17 +20,17 @@ public class Users {
 		this.login = login;
 	}
 
-	public Double getTotal_ammount() {
-		return total_ammount;
+	public Double getTotal_amount() {
+		return total_amount;
 	}
 
-	public void setTotal_ammount(Double total_ammount) {
-		this.total_ammount = total_ammount;
+	public void setTotal_ammount(Double total_amount) {
+		this.total_amount = total_amount;
 	}
 
 	@Override
 	public String toString() {
-		return "User: " + getLogin() + ";  " + "Balance : " + getTotal_ammount();
+		return "User: " + getLogin() + ";  " + "Balance : " + getTotal_amount();
 	}
 
 }

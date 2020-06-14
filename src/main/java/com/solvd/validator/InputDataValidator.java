@@ -33,8 +33,7 @@ public class InputDataValidator {
     public void pathValidate() {
         LOGGER.error("Path is incorrect");
         System.out.println("You entered incorrect path");
-        System.out.println(infoOfValidation.instruction);
-        System.exit(0);
+        infoOfValidation.getValidationInfo();
     }
 
 }

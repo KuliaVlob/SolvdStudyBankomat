@@ -71,7 +71,6 @@ public class DataATM {
                 getInputData();
                 break;
             case ("E"):
-                sc.close();
                 exit();
             default:
                 reproduceSubmenu();
@@ -81,11 +80,36 @@ public class DataATM {
 
     }
 
+    public void displayNextInfo() {
+    	
+    
+    	System.out.println("================================================================");
+		System.out.println("Do you want to continue working with program? Y/N");
+		System.out.println("Enter Y if yes.");
+		System.out.println("Enter N if no.");
+
+		String action = sc.next();
+		action = action.toUpperCase();
+		switch (action) {
+		case ("Y"):
+			
+			System.out.println("You need to re-enter the input data to perform the operations");
+			getInputData();
+			break;
+			
+		default:
+			exit();
+			break;
+		}
+
+    }
+    
     public void exit() {
         System.out.println("================================================================");
         System.out.println("Thank you for using application");
         LOGGER.info("Work completed!!!");
         System.out.println("================================================================");
+        sc.close();
         System.exit(0);
     }
 

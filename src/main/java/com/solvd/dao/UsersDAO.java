@@ -20,19 +20,19 @@ public class UsersDAO implements IUsersDAO {
 	}
 
 	@Override
-	public Users getUsersAmmount(String login) {
+	public Users getUsersAmount(String login) {
 		SqlSession session = MyBatisConfigUtil.getSqlSessionFactory().openSession();
 		entityDAO = session.getMapper(DAOUsersClass);
-		Users entity = entityDAO.getUsersAmmount(login);
+		Users entity = entityDAO.getUsersAmount(login);
 		session.close();
 		return entity;
 	}
 
 	@Override
-	public void updateAmmount(Double total_ammount, String login) {
+	public void updateAmount(Double total_amount, String login) {
 		SqlSession session = MyBatisConfigUtil.getSqlSessionFactory().openSession();
 		entityDAO = session.getMapper(DAOUsersClass);
-		entityDAO.updateAmmount(total_ammount, login);
+		entityDAO.updateAmount(total_amount, login);
 		session.commit();
 		session.close();
 	}

@@ -18,9 +18,9 @@ public class Convertor {
     private Double coefficient = Double.valueOf(coefficientString);
 
     public Double converterToUSD(Transaction transaction) {
-        convert = transaction.getAmmount()*coefficient;
+        convert = transaction.getAmount()*coefficient;
         LOGGER.info("The amount was converted into Euros");
-        LOGGER.info( transaction.getAmmount()+ "------> "+convert);
+        LOGGER.info( transaction.getAmount()+ "------> "+convert);
         return convert;
     }
 
