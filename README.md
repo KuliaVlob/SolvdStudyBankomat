@@ -1,6 +1,6 @@
 # SolvdStudyBankomat
 
-## Student  project for solvd.com
+## Student  project for Solvd.Inc
 
 <div style="text-align:center"><img src="https://github.com/Iemelianova/Stuff/raw/master/ATM.png" />
 </div>
