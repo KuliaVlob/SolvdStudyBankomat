@@ -17,7 +17,7 @@ public class InputDataValidator {
         DataATM dataATM = new DataATM();
         UsersDAO usersDAO = new UsersDAO();
         try {
-        if (usersDAO.getUsersByLogin(servicesATM.login) != null) {
+        if (usersDAO.getUsersByLogin(ServicesATM.login) != null) {
             LOGGER.info("The login check has been validated");
         } else {
             LOGGER.error("Login is incorrect");
@@ -26,7 +26,7 @@ public class InputDataValidator {
         }
         } catch (PersistenceException e) {
             LOGGER.error("Sorry, too many connections, please, try again later.");
-            dataATM.exit();
+            infoOfValidation.getValidationInfo();
         }
     }
 

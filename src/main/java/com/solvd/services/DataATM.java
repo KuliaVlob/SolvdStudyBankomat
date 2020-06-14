@@ -23,7 +23,7 @@ public class DataATM {
         System.out.print("Enter user: ");
         ServicesATM.login = sc.next();
 
-        loginValidator.loginValidate(servicesATM);
+       // loginValidator.loginValidate(servicesATM);
 
         System.out.print("Enter path: ");
         servicesATM.path = sc.next();

@@ -40,10 +40,9 @@ public class ServicesATM {
                 case ("USD"):
 
                     if (amount >= transaction.getAmount()) {
-                        amount -= transaction.getAmount();
-
                         banknoteService.getBanknoteUSD(transaction);
 
+                        amount -= transaction.getAmount();
                         usersDAO.updateAmount(amount, users.getLogin());
 
                         dataATM.reproduceSubmenu();

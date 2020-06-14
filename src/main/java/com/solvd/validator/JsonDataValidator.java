@@ -24,14 +24,17 @@ public class JsonDataValidator {
             infoOfValidation.getValidationInfo();
         }
 
-        int[] correctBanknote = {10, 20, 50, 100, 200, 500};
-        for (Integer banknotes : correctBanknote) {
-            if (!banknotes.equals(transaction.getBanknote())) {
-                LOGGER.error("Banknote is incorrect");
-                System.out.println("Input banknote is incorrect");
-                infoOfValidation.getValidationInfo();
-            }
-        }
+//        Integer[] correctBanknote = {10, 20, 50, 100, 200, 500};
+//        for (Integer banknotes : correctBanknote) {
+//            if (banknotes.equals(transaction.getBanknote())){
+//                System.out.println(banknotes);
+//                System.out.println(transaction.getBanknote());
+//
+//                LOGGER.error("Banknote is incorrect");
+//                System.out.println("Input banknote is incorrect");
+//                infoOfValidation.getValidationInfo();
+//            }
+//        }
 
         int minBanknote = 10;
         if (transaction.getAmount() % minBanknote != 0) {

@@ -57,7 +57,4 @@ public class UsdDAO implements IUsdDAO {
 		session.close();
 	}
 
-
-
-
 }
