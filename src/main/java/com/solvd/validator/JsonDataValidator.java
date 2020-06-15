@@ -1,6 +1,7 @@
 package com.solvd.validator;
 
 import com.solvd.pojo.Transaction;
+import com.solvd.utils.PropertyReader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,6 +12,7 @@ import java.util.Objects;
 public class JsonDataValidator {
     private final static Logger LOGGER = LogManager.getLogger(JsonDataValidator.class);
     private InfoRefuseValidation infoRefuseValidation = new InfoRefuseValidation();
+    private int minBanknote = Integer.parseInt(PropertyReader.getValueFromProperties("minBanknote"));
 
     public void sumReValidate() {
         LOGGER.error("The amount verification was not validated");
@@ -37,7 +39,7 @@ public class JsonDataValidator {
                 }
             }
 
-            int minBanknote = 10;
+
             if (transaction.getAmount() % minBanknote != 0) {
                 LOGGER.error("The amount not integer or not multiply of 10");
                 System.out.println("To withdraw money from the account," +

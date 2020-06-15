@@ -2,6 +2,7 @@ package com.solvd.services;
 
 import com.solvd.dao.EurDAO;
 import com.solvd.model.Eur;
+import com.solvd.utils.PropertyReader;
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,8 +14,6 @@ import com.solvd.validator.InfoRefuseValidation;
 public class BanknoteService {
 
 
-    private Usd usd = new Usd();
-    private Eur eur = new Eur();
     private UsdDAO usdDAO = new UsdDAO();
     private EurDAO eurDAO = new EurDAO();
     private double sumForGettingJSON;
@@ -22,18 +21,18 @@ public class BanknoteService {
     private double quantity;
     private static final Logger LOGGER = LogManager.getLogger(BanknoteService.class);
     private InfoRefuseValidation infoOfValidation = new InfoRefuseValidation();
-
+    private int minBanknote = Integer.parseInt(PropertyReader.getValueFromProperties("minBanknote"));
     public void getBanknoteUSD(Transaction transaction) {
-        int minBanknote = 10;
+
         sumForGettingJSON = transaction.getAmount();
         banknoteJSON = transaction.getBanknote();
 
         try {
-            usd = usdDAO.getQuantityByBanknoteUSD(banknoteJSON);
+            Usd usd = usdDAO.getQuantityByBanknoteUSD(banknoteJSON);
             if (usd.getQuantity().equals("yes")) {
                 convertToBanknote();
                 System.out.println("You are getting: " + quantity + " By: " + banknoteJSON + " banknotes");
-                if ((int) sumForGettingJSON > 0) {
+                if (sumForGettingJSON > 0) {
                     transaction.setBanknote((int) sumForGettingJSON);
                     banknoteJSON = transaction.getBanknote();
                     for (Usd banknotes : usdDAO.getAvailableBanknoteUSD("yes")) {
@@ -59,16 +58,15 @@ public class BanknoteService {
     }
 
     public void getBanknoteEUR(Transaction transaction) {
-        int minBanknote = 10;
         sumForGettingJSON = transaction.getAmount();
         banknoteJSON = transaction.getBanknote();
 
         try {
-            eur = eurDAO.getQuantityByBanknoteEUR(banknoteJSON);
+            Eur eur = eurDAO.getQuantityByBanknoteEUR(banknoteJSON);
             if (eur.getQuantity().equals("yes")) {
                 convertToBanknote();
                 System.out.println("You are getting: " + quantity + " By: " + banknoteJSON + " banknotes");
-                if ((int) sumForGettingJSON > 0) {
+                if (sumForGettingJSON > 0) {
                     transaction.setBanknote((int) sumForGettingJSON);
                     banknoteJSON = transaction.getBanknote();
                     for (Eur banknotes : eurDAO.getAvailableBanknoteEUR("yes")) {
