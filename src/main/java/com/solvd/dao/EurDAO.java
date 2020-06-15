@@ -30,15 +30,7 @@ public class EurDAO implements IEurDAO {
 		return entity;
 	}
 
-	@Override
-	public void updateQuantityByBanknoteEUR(Eur entity) {
-		SqlSession session = MyBatisConfigUtil.getSqlSessionFactory().openSession();
-		entityDAO = session.getMapper(DAOEurClass);
-		entityDAO.updateQuantityByBanknoteEUR(entity);
-		session.commit();
-		session.close();
-
-	}
+	
 	@Override
 	public List<Eur> getAvailableBanknoteEUR (String quantity) {
 		SqlSession session = MyBatisConfigUtil.getSqlSessionFactory().openSession();
@@ -48,12 +40,7 @@ public class EurDAO implements IEurDAO {
 		return entities;
 	}
 
-	@Override
-	public void getBanknoteEUR(Eur entity) {
-		SqlSession session = MyBatisConfigUtil.getSqlSessionFactory().openSession();
-		entityDAO = session.getMapper(DAOEurClass);
-		entityDAO.getBanknoteEUR(entity);
-		session.commit();
-		session.close();
-	}
+	
+
+	
 }

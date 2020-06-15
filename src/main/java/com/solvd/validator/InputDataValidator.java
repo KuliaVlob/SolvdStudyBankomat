@@ -1,6 +1,7 @@
 package com.solvd.validator;
 
 import com.solvd.dao.UsersDAO;
+import com.solvd.pojo.Transaction;
 import com.solvd.services.DataATM;
 import com.solvd.services.ServicesATM;
 import org.apache.ibatis.exceptions.PersistenceException;
@@ -10,7 +11,7 @@ import org.apache.logging.log4j.Logger;
 public class InputDataValidator {
 
     private final static Logger LOGGER = LogManager.getLogger(InputDataValidator.class);
-    private InfoOfValidation infoOfValidation = new InfoOfValidation();
+    private InfoRefuseValidation infoRefuseValidation = new InfoRefuseValidation();
 
     public void loginValidate(ServicesATM servicesATM) {
 
@@ -30,10 +31,12 @@ public class InputDataValidator {
         }
     }
 
+   
+    
     public void pathValidate() {
         LOGGER.error("Path is incorrect");
         System.out.println("You entered incorrect path");
-        infoOfValidation.getValidationInfo();
+        infoRefuseValidation.getValidationInfo();
     }
 
 }
