@@ -36,17 +36,13 @@ public class ServicesATM {
             Double amount = users.getTotal_amount();
             validation.jsonDataValidate(transaction);
             LOGGER.info("Banknote is correct");
-
             switch (transaction.getCurrency()) {
                 case ("USD"):
-
                     if (amount >= transaction.getAmount()) {
                         amount -= transaction.getAmount();
-
                         banknoteService.getBanknoteUSD(transaction);
-
                         usersDAO.updateAmount(amount, users.getLogin());
-
+                        LOGGER.info(+transaction.getAmount() + " - the amount has been deducted from your account ");
                         dataATM.reproduceSubmenu();
                     } else {
                         validation.sumReValidate();
@@ -62,6 +58,7 @@ public class ServicesATM {
                         banknoteService.getBanknoteEUR(transaction);
                         convertor.getInfoConvert(transaction);
                         usersDAO.updateAmount(amount, users.getLogin());
+                        LOGGER.info(+convertor.convert + " - the amount has been deducted from your account ");
                         dataATM.reproduceSubmenu();
                     } else {
                         validation.sumReValidate();

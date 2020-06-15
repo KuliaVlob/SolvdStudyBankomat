@@ -13,7 +13,7 @@ public class Convertor {
     private static final Logger LOGGER = LogManager.getLogger(Convertor.class);
 
 
-    private Double convert;
+    protected Double convert;
     private String coefficientString = PropertyReader.getValueFromProperties("coefficient");
     private Double coefficient = Double.valueOf(coefficientString);
 
