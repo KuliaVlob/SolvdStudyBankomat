@@ -30,15 +30,7 @@ public class UsdDAO implements IUsdDAO {
 		return entity;
 	}
 
-	@Override
-	public void updateQuantityByBanknoteUSD(Usd entity) {
-		SqlSession session = MyBatisConfigUtil.getSqlSessionFactory().openSession();
-		entityDAO = session.getMapper(DAOUsdClass);
-		entityDAO.updateQuantityByBanknoteUSD(entity);
-		session.commit();
-		session.close();
-	}
-
+	
 	@Override
 	public List<Usd> getAvailableBanknoteUSD (String quantity) {
 		SqlSession session = MyBatisConfigUtil.getSqlSessionFactory().openSession();
@@ -48,16 +40,6 @@ public class UsdDAO implements IUsdDAO {
 		return entities;
 	}
 
-	@Override
-	public void getBanknoteUSD(Usd entity) {
-		SqlSession session = MyBatisConfigUtil.getSqlSessionFactory().openSession();
-		entityDAO = session.getMapper(DAOUsdClass);
-		entityDAO.getBanknoteUSD(entity);
-		session.commit();
-		session.close();
-	}
-
-
-
+	
 
 }

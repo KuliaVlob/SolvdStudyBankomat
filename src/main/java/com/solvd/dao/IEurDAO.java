@@ -10,10 +10,6 @@ public interface IEurDAO {
 
 	Eur getQuantityEUR(String quantity);
 
-	void updateQuantityByBanknoteEUR(Eur entity);
-
 	List<Eur> getAvailableBanknoteEUR (String quantity);
 	
-	void getBanknoteEUR(Eur entity);
-
 }

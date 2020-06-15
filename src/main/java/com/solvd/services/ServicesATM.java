@@ -4,7 +4,7 @@ import com.solvd.dao.UsersDAO;
 import com.solvd.model.Users;
 import com.solvd.pojo.Transaction;
 import com.solvd.utils.WorkwithJson;
-
+import com.solvd.validator.InfoRefuseValidation;
 import com.solvd.validator.JsonDataValidator;
 import org.apache.ibatis.exceptions.PersistenceException;
 
@@ -24,7 +24,7 @@ public class ServicesATM {
     protected String path;
     private JsonDataValidator validation = new JsonDataValidator();
     private BanknoteService banknoteService = new BanknoteService();
-
+    private InfoRefuseValidation infoRefuseValidation = new InfoRefuseValidation();
 
     public void withdrawFunds() {
 
@@ -35,7 +35,8 @@ public class ServicesATM {
             Users users = usersDAO.getUsersAmount(login);
             Double amount = users.getTotal_amount();
             validation.jsonDataValidate(transaction);
-
+            LOGGER.info("Banknote is correct");
+            
             switch (transaction.getCurrency()) {
                 case ("USD"):
 
@@ -69,7 +70,7 @@ public class ServicesATM {
 
                 default:
                     LOGGER.info("Unknown currency type. The session is closed.");
-                    System.exit(0);
+                    infoRefuseValidation.getValidationInfo();
                     break;
 
             }
