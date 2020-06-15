@@ -59,9 +59,11 @@ public class ServicesATM {
                         amount -= convertor.converterToUSD(transaction);
                         amount = new BigDecimal
                                 (amount).setScale(2, RoundingMode.HALF_UP).doubleValue();
+                        banknoteService.getBanknoteEUR(transaction);
 
                         usersDAO.updateAmount(amount, users.getLogin());
 
+                        dataATM.reproduceSubmenu();
                     } else {
                         validation.sumReValidate();
                     }
