@@ -36,7 +36,7 @@ public class ServicesATM {
             Double amount = users.getTotal_amount();
             validation.jsonDataValidate(transaction);
             LOGGER.info("Banknote is correct");
-            
+
             switch (transaction.getCurrency()) {
                 case ("USD"):
 
@@ -60,9 +60,8 @@ public class ServicesATM {
                         amount = new BigDecimal
                                 (amount).setScale(2, RoundingMode.HALF_UP).doubleValue();
                         banknoteService.getBanknoteEUR(transaction);
-
+                        convertor.getInfoConvert(transaction);
                         usersDAO.updateAmount(amount, users.getLogin());
-
                         dataATM.reproduceSubmenu();
                     } else {
                         validation.sumReValidate();
@@ -94,7 +93,7 @@ public class ServicesATM {
             LOGGER.error("Sorry, too many connections, please, try again later.");
             dataATM.exit();
         }
-        
+
         dataATM.displayNextInfo();
 
     }
