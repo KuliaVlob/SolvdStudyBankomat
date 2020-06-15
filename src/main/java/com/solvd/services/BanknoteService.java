@@ -30,23 +30,22 @@ public class BanknoteService {
         try {
         usd = usdDAO.getQuantityByBanknoteUSD(banknoteJSON);
 
-        if (usd.getQuantity().equals("yes")) {
-            convertToBanknote();
-            if ((int) sumForGetingJSON > 0) {
-                transaction.setBanknote((int) sumForGetingJSON);
-                banknoteJSON = transaction.getBanknote();
-                //getAvailableBanknote();
-                do {
-                    if (usd.getQuantity().equals("yes")) {
-                        convertToBanknote();
-                    } else {
-                        System.out.println("You are getting: " + quantity + " By: " + banknoteJSON + " banknotes");
-                    }
-                } while (sumForGetingJSON != 0);
-            } else {
-                System.out.println("You are getting: " + quantity + " By: " + banknoteJSON + " banknotes");
-            }
-        } else {
+            if (usd.getQuantity().equals("yes")) {
+                convertToBanknote();
+                if ((int) sumForGetingJSON > 0) {
+                    transaction.setBanknote((int) sumForGetingJSON);
+                    banknoteJSON = transaction.getBanknote();
+                    //getAvailableBanknote();
+                    do {
+                        if (usd.getQuantity().equals("yes")) {
+                            convertToBanknote();
+                        } else {
+                            System.out.println("You are getting: " + quantity + " By: " + banknoteJSON + " banknotes");
+                        }
+                    } while (sumForGetingJSON != 0);
+                } else {
+                    System.out.println("You are getting: " + quantity + " By: " + banknoteJSON + " banknotes");
+                }} else {
             getRefuseInfo();
             getAvailableBanknote();
             quitProgram();

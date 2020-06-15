@@ -36,8 +36,8 @@ public class DataATM {
 
     public void chooseAction() {
         System.out.println("================================================================");
-        System.out.println("Display balance: D");
-        System.out.println("Withdraw funds:  W");
+        System.out.println("To display balance press D");
+        System.out.println("To Withdraw funds press W");
 
         String choosing = sc.next();
         choosing = choosing.toUpperCase();
@@ -57,9 +57,9 @@ public class DataATM {
 
     public void reproduceSubmenu() {
         System.out.println("================================================================");
-        System.out.println("To display balance:               D");
-        System.out.println("To change the source data, enter: С");
-        System.out.println("Exit<-----------------------------E");
+        System.out.println("To display balance press key D");
+        System.out.println("To change the source data, enter press С");
+        System.out.println("To exit press E");
 
         String action = sc.next();
         action = action.toUpperCase();
@@ -92,11 +92,11 @@ public class DataATM {
 		action = action.toUpperCase();
 		switch (action) {
 		case ("Y"):
-			
+
 			System.out.println("You need to re-enter the input data to perform the operations");
 			getInputData();
 			break;
-			
+
 		default:
 			exit();
 			break;
