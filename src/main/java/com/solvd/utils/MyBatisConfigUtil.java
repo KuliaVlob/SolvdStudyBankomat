@@ -13,7 +13,6 @@ import org.apache.logging.log4j.Logger;
 /**
  * Creates an SqlSession out of a connection
  * 
- * @see SqlSessionFactory
  * @author Iryna Iemelianova
  */
 public class MyBatisConfigUtil {
@@ -25,6 +24,7 @@ public class MyBatisConfigUtil {
 	/**
 	 * Creates an SqlSession out of a connection using {@link SqlSessionFactory}
 	 * @throws IOException can appear in cases when session creation failed
+	 * 
 	 */
 	public static SqlSessionFactory getSqlSessionFactory() {
 		try {
