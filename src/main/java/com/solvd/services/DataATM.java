@@ -7,6 +7,12 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Scanner;
 
+/**
+ * Main menu-class, contains all the basic operations 
+ * for working with the program (input data from console)
+ * 
+ * @author Yana Dorosh
+ */
 public class DataATM {
 
     private final static Logger LOGGER = LogManager.getLogger(DataATM.class);

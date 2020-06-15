@@ -1,5 +1,10 @@
 package com.solvd.model;
 
+/**
+ * Model class for data base table "Usd"
+ * 
+ * @author Iryna Iemelianova
+ */
 public class Usd {
 
 	    private Integer id;
