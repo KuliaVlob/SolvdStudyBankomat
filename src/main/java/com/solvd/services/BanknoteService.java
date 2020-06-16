@@ -22,6 +22,7 @@ public class BanknoteService {
     private static final Logger LOGGER = LogManager.getLogger(BanknoteService.class);
     private InfoRefuseValidation infoOfValidation = new InfoRefuseValidation();
     private int minBanknote = Integer.parseInt(PropertyReader.getValueFromProperties("minBanknote"));
+
     public void getBanknoteUSD(Transaction transaction) {
 
         sumForGettingJSON = transaction.getAmount();
