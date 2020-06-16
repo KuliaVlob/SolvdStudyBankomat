@@ -10,7 +10,7 @@
 
 This project is simulation of the ATM program. Data is entered through the console menu - user and path
 to json file. Data what amount to withdraw, what denominations
-and which currency (USD / EUR) are taken from the json file. application
+and which currency (USD / EUR) are taken from the json file. Application
 checks the validity of the amount, is there a given amount on the account, if
 there are banknotes of this denomination in an ATM. If validation is successful, then the amount is issued.
 
