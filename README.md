@@ -41,11 +41,11 @@ Screenshot of data base with valid logins:
 
 ### Authors:
 
-- Yana Dorosh;
+- [Yana Dorosh](https://github.com/YanaDorosh/);
 
-- Ihor Hnidko;
+- [Ihor Hnidko](https://github.com/KuliaVlob/);
 
-- Iryna Iemelianova.
+- [Iryna Iemelianova](https://github.com/Iemelianova/).
 
 ### Gratitude:
 
