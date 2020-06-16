@@ -19,8 +19,4 @@
         select banknote from eur where quantity = #{quantity}
     </select>
 
-    <select id="getBanknoteEUR" resultMap="eur">
-        select banknote from eur
-    </select>
-
    	</mapper>

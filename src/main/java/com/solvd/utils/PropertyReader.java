@@ -11,6 +11,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import com.solvd.services.*;
 
+/**
+ * Class for reading from properties
+ * 
+ * @author Iryna Iemelianova
+ */
 public class PropertyReader {
 
 	private static String separator = File.separator;
@@ -22,7 +27,16 @@ public class PropertyReader {
 	private static DataATM dataATM = new DataATM();
 	
 	
-	
+	/**
+	   * Getting value from properties by the key
+	   * 
+	   * @param PATH to the file
+	   * @param key to the value
+	   * @return value of the key
+	   * @throws IOException if file does not exist
+	   * @see {@link FileInputStream}
+	   * @see {@link Properties#getProperty}
+	   */
 	public static String getValueFromProperties(String key) {
 		Properties properties = new Properties();
 		FileInputStream inputStream = null;

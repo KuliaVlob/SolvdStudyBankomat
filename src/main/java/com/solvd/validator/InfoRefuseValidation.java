@@ -4,6 +4,11 @@ import com.solvd.services.ServicesATM;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * The class is designed to display information in case of failure
+ * 
+ * @author Yana Dorosh
+ */
 public class InfoRefuseValidation {
 
     private static final Logger LOGGER = LogManager.getLogger(InfoRefuseValidation.class);

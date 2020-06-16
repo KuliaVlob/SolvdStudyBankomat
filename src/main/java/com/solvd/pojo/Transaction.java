@@ -1,5 +1,10 @@
 package com.solvd.pojo;
 
+/**
+ * Model class for JSON files
+ * 
+ * @author Ihor Hnidko
+ */
 public class Transaction {
 
 	private Double amount;

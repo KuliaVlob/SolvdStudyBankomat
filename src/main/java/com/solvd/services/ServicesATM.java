@@ -14,6 +14,11 @@ import org.apache.logging.log4j.Logger;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+/**
+ * Class represents main options of a program
+ * 
+ * @author Yana Dorosh
+ */
 public class ServicesATM {
 
     private static final Logger LOGGER = LogManager.getLogger(ServicesATM.class);
@@ -26,6 +31,16 @@ public class ServicesATM {
     private BanknoteService banknoteService = new BanknoteService();
     private InfoRefuseValidation infoRefuseValidation = new InfoRefuseValidation();
 
+    /**
+     * Withdrawing the amount from the account, 
+     * work with {@link Usd} and {@link Eur}. Subtraction and 
+     * updating {@link Users}.total_amount if validators did not work
+     * @throws PersistenceException occurs when 
+     * there is a problem with connection to database 
+     * @see BigDecimal
+     * @see RoundingMode
+     * 
+     */
     public void withdrawFunds() {
 
         DataATM dataATM = new DataATM();
@@ -78,7 +93,11 @@ public class ServicesATM {
         }
     }
 
-
+    /**
+     * Displays {@link Users}.total_amount from database
+     * @throws PersistenceException occurs when 
+     * there is a problem with connection to database 
+     */
     public void displayBalance() {
         DataATM dataATM = new DataATM();
 

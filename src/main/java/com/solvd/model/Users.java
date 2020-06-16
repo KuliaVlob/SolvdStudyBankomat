@@ -1,5 +1,10 @@
 package com.solvd.model;
 
+/**
+ * Model class for data base table "Users"
+ * 
+ * @author Iryna Iemelianova
+ */
 public class Users {
 
 

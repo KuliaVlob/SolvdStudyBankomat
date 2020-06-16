@@ -11,13 +11,26 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.nio.file.Paths;
 
+/**
+ * Class for parsing JSON files by established format
+ * 
+ * @author Ihor Hnidko
+ */
 public class WorkwithJson {
 
     private static final Logger LOGGER = LogManager.getLogger(WorkwithJson.class);
     private InputDataValidator pathValidator = new InputDataValidator();
     
 
-
+    /**
+     * Reading from JSON file
+     * 
+     * @param pathtoFile
+     * @return object of {@link Transaction}, assigning values ​​to the fields from the file
+     * @throws JsonProcessingException occurs while processing (parsing, generating) JSON content
+     * @throws IOException if file does not exist
+     * @see {@link InputDataValidator#pathValidate}
+     */
 	public Transaction JsonReader(String pathtoFile) {
 
 

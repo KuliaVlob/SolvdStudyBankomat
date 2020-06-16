@@ -7,11 +7,24 @@ import com.solvd.utils.MyBatisConfigUtil;
 
 import java.util.List;
 
+/**
+ * DAO class, used to access data from database table "Usd"
+ * 
+ * @see IUsdDAO
+ * @author Iryna Iemelianova
+ */
 public class UsdDAO implements IUsdDAO {
 
 	private IUsdDAO entityDAO;
 	private Class<IUsdDAO> DAOUsdClass = IUsdDAO.class;
 
+	/**
+	   * Method returns fields {@link Usd#banknote}, {@link Usd#quantity}, which is present in the
+	   * database
+	   * 
+	   * @param banknote - banknote in denominations of n
+	   * @return banknote, quantity of USD
+	   */
 	@Override
 	public Usd getQuantityByBanknoteUSD(Integer banknote) {
 		SqlSession session = MyBatisConfigUtil.getSqlSessionFactory().openSession();
@@ -21,6 +34,12 @@ public class UsdDAO implements IUsdDAO {
 		return entity;
 	}
 
+	/**
+	   * Method returns fields {@link Usd#quantity}, which is present in the database
+	   * 
+	   * @param quantity - the presence of banknotes in the database
+	   * @return quantity of USD banknotes
+	   */
 	@Override
 	public Usd getQuantityUSD(String quantity) {
 		SqlSession session = MyBatisConfigUtil.getSqlSessionFactory().openSession();
@@ -30,7 +49,12 @@ public class UsdDAO implements IUsdDAO {
 		return entity;
 	}
 
-	
+	/**
+	   * Method returns fields {@link Usd#banknote}, which is present in the database
+	   * 
+	   * @param quantity - the presence of banknotes in the database
+	   * @return banknote of USD
+	   */
 	@Override
 	public List<Usd> getAvailableBanknoteUSD (String quantity) {
 		SqlSession session = MyBatisConfigUtil.getSqlSessionFactory().openSession();
