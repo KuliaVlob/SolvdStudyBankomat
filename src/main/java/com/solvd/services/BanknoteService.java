@@ -53,7 +53,8 @@ public class BanknoteService {
             Usd usd = usdDAO.getQuantityByBanknoteUSD(banknoteJSON);
             if (usd.getQuantity().equals("yes")) {
                 convertToBanknote();
-                System.out.println("You are getting: " + quantity + " USD. By: " + banknoteJSON + " banknotes");
+                System.out.println("You are getting: " + quantity + " USD. By: "
+                        + banknoteJSON + " banknotes");
                 if (sumForGettingJSON > 0) {
                     transaction.setBanknote((int) sumForGettingJSON);
                     banknoteJSON = transaction.getBanknote();
@@ -66,7 +67,8 @@ public class BanknoteService {
                     }
                     if (sumForGettingJSON > minBanknote) {
                         convertToBanknote();
-                        System.out.println("You are getting: " + quantity + " USD. By: " + minBanknote + " banknotes");
+                        System.out.println("You are getting: " + quantity + " USD. By: "
+                                + minBanknote + " banknotes");
                     }
                 }
             } else {
@@ -101,7 +103,8 @@ public class BanknoteService {
             Eur eur = eurDAO.getQuantityByBanknoteEUR(banknoteJSON);
             if (eur.getQuantity().equals("yes")) {
                 convertToBanknote();
-                System.out.println("You are getting: " + quantity + " EUR. By: " + banknoteJSON + " banknotes");
+                System.out.println("You are getting: " + quantity + " EUR. By: "
+                        + banknoteJSON + " banknotes");
                 if (sumForGettingJSON > 0) {
 
                     transaction.setBanknote((int) sumForGettingJSON);
@@ -115,8 +118,8 @@ public class BanknoteService {
                     }
                     if (sumForGettingJSON > minBanknote) {
                         convertToBanknote();
-                        System.out.println("You are getting: " + quantity + " By: "
-                                                               + banknoteJSON + " banknotes");
+                        System.out.println("You are getting: " + quantity + " EUR. By: "
+                                + minBanknote + " banknotes");
                     }
                 }
             } else {
@@ -142,7 +145,6 @@ public class BanknoteService {
             LOGGER.error("Sorry, too many connections, please, try again later.");
             infoOfValidation.getValidationInfo();
         }
-
     }
 
     /**
@@ -158,7 +160,6 @@ public class BanknoteService {
             LOGGER.error("Sorry, too many connections, please, try again later.");
             infoOfValidation.getValidationInfo();
         }
-
     }
 
     /**
